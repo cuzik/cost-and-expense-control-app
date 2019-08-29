@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Expense Control</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render("layouts/partials/navbar") %>
+    <%= render("flashes") %>
+    <div id="wrapper">
+      <div id="content-wrapper">
+        <div class="container">
+          <%= yield %>
+        </div>
+        <%= render("layouts/partials/footer") %>
+      </div>
+    </div>
+  </body>
+</html>

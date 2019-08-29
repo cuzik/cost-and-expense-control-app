@@ -1,0 +1,15 @@
+@import "bootstrap-custom";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "toastr/toastr";
+
+#toast-container {
+  .toast {
+    opacity: 0.95 !important;
+  }
+}
+
+.list-container {
+  min-height: 400px;
+  background-color: #ff0000;
+}

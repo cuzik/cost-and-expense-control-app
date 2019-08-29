@@ -1,0 +1,7 @@
+version: '3'
+services:
+  db_udesc:
+    image: postgres
+    container_name: "postgres-expense-control"
+    ports:
+      - "5432:5432"
