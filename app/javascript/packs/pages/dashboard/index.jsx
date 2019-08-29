@@ -22,11 +22,11 @@ class DashboardIndex extends React.Component {
 
   setBalanceLists() {
     entryList().then((res) => {
-      const balanceList = res.data
+      const { credit, debit} = res.data.entries
 
       this.setState({
-        balanceCredit: balanceList.filter((item) => item.kind === 'credit'),
-        balanceDebit: balanceList.filter((item) => item.kind === 'debit')
+        balanceCredit: credit,
+        balanceDebit: debit
       })
     })
   }
@@ -52,41 +52,10 @@ class DashboardIndex extends React.Component {
     this.state.balanceCredit.reduce((total, item) => total + item.value, 0) - this.state.balanceDebit.reduce((total, item) => total + item.value, 0)
   )
 
-  renderHeader() {
-    const totalValue = this.totalCurrentMonth()
-
-    if (totalValue < 0) {
-      return (
-        <div className="card">
-          <div className='card-body btn-danger'>
-            <h4>SALDO DO MÊS <span className="float-right">R$ {this.totalCurrentMonth()}</span></h4>
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div className="card">
-          <div className='card-body btn-success'>
-            <h4>SALDO DO MÊS <span className="float-right">R$ {this.totalCurrentMonth()}</span></h4>
-          </div>
-        </div>
-      )
-    }
-  }
-
   render() {
     return (
       <React.Fragment>
         <div className='container'>
-          <br />
-          <div className="row">
-            <div className="col-6">
-              {this.renderHeader()}
-            </div>
-            <div className="col-6">
-              {this.renderHeader()}
-            </div>
-          </div>
           <br />
           <div className="card">
             <div className="card-header">
@@ -109,7 +78,7 @@ class DashboardIndex extends React.Component {
                   />
                 </div>
                 <div className='col-4'>
-                  <h4>Pagamentos Previstos</h4>
+                  <h4>Pagamentos Realisados</h4>
                   <BalanceCard
                     listBalance={this.state.balanceDebit}
                     itemClasses="list-group-item list-group-item-action list-group-item-info"

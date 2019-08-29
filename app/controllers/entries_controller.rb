@@ -3,7 +3,15 @@ class EntriesController < ApplicationController
 
   def index
     respond_to do |format|
-      format.json { render json: current_user.entries.order(id: :desc), status: :ok }
+      format.json {
+        render json:
+          {
+            entries: {
+              credit: current_user.entries.order(id: :desc).credit,
+              debit: current_user.entries.order(id: :desc).debit
+            }
+          },
+          status: :ok }
       format.html {}
     end
   end
