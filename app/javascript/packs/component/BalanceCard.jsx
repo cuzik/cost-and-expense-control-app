@@ -15,13 +15,9 @@ const BalanceCardList = ({ listBalance, itemClasses }) => (
   </div>
 )
 
-const BalanceCard = ({ listBalance, itemClasses, title='Balance', subtitle='Lista Balance' }) => (
+const BalanceCard = ({ listBalance, itemClasses }) => (
   <div className="card">
-    <div className="card-header">
-      <h5>{title}</h5>
-    </div>
-    <div className="card-body">
-      <h5 className="card-title">{subtitle}</h5>
+    <div className="card-body card-balance">
       <BalanceCardList listBalance={listBalance} itemClasses={itemClasses} />
     </div>
 

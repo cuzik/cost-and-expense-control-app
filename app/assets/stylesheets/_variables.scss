@@ -45,18 +45,6 @@ $green:   #28a745 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
-$udesc-green: #139954 !default;
-$udesc-green-light: #c4f5c6 !default;
-$udesc-green-dark: #054B28 !default;
-$udesc-red: #EF4136 !default;
-$udesc-red-dark: #C1282A !default;
-
-$udesc-warning: rgba(186, 121, 37, 1) !default;
-$udesc-info:    rgba(64, 100, 119, 1)   !default;
-$udesc-success: $udesc-green-dark  !default;
-$udesc-danger:  $udesc-red-dark    !default;
-$udesc-primary: $blue   !default;
-
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $colors: map-merge(
@@ -73,21 +61,17 @@ $colors: map-merge(
     "cyan":       $cyan,
     "white":      $white,
     "gray":       $gray-600,
-    "gray-dark":  $gray-800,
-    "udesc-green": $udesc-green,
-    "udesc-green-light": $udesc-green-light,
-    "udesc-green-dark": $udesc-green-dark,
-    "udesc-red": $udesc-red
+    "gray-dark":  $gray-800
   ),
   $colors
 );
 
-$primary:       $udesc-primary !default;
+$primary:       $blue !default;
 $secondary:     $gray-600 !default;
-$success:       $udesc-success !default;
-$info:          $udesc-info !default;
-$warning:       $udesc-warning !default;
-$danger:        $udesc-danger !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
 

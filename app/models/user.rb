@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :cpf, presence: true, uniqueness: { case_sensitive: false }
+
+  has_many :entries
 end
