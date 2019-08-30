@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import Modal from 'react-responsive-modal';
+import Modal from 'react-responsive-modal'
 
 import BalanceCard from '../../component/BalanceCard'
 import { entryList } from '../../services/requests'
 import NewFormEntry from '../entry/newFormEntry'
+import DashboardHeader from './DashboardHeader'
 
 class DashboardIndex extends React.Component {
   constructor(props) {
@@ -41,12 +42,12 @@ class DashboardIndex extends React.Component {
   }
 
   onOpenModal = () => {
-    this.setState({ openNewModal: true });
-  };
+    this.setState({ openNewModal: true })
+  }
 
   onCloseModal = () => {
-    this.setState({ openNewModal: false });
-  };
+    this.setState({ openNewModal: false })
+  }
 
   totalCurrentMonth = () => (
     this.state.balanceCredit.reduce((total, item) => total + item.value, 0) - this.state.balanceDebit.reduce((total, item) => total + item.value, 0)
@@ -55,8 +56,10 @@ class DashboardIndex extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <br />
+        <DashboardHeader />
+        <br />
         <div className='container'>
-          <br />
           <div className="card">
             <div className="card-header">
               <h5>Balanço atual <button className="float-right btn btn-success" onClick={this.onOpenModal}>Novo Lançamento</button></h5>

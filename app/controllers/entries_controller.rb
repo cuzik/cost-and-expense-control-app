@@ -1,6 +1,4 @@
 class EntriesController < ApplicationController
-  before_action :set_entry, only: [:show, :edit, :update, :destroy]
-
   def index
     respond_to do |format|
       format.json {
@@ -26,31 +24,7 @@ class EntriesController < ApplicationController
     end
   end
 
-  def update
-    respond_to do |format|
-      if @entry.update(entry_params)
-        format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
-        format.json { render :show, status: :ok, location: @entry }
-      else
-        format.html { render :edit }
-        format.json { render json: @entry.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @entry.destroy
-    respond_to do |format|
-      format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    def set_entry
-      @entry = user.entries.find(params[:id])
-    end
-
     def entry_params
       params.require(:entry).permit(:description, :due_date, :value, :kind)
     end

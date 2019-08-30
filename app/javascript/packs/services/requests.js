@@ -6,6 +6,10 @@ const getHeader = () => {
   return { headers: { 'X-CSRF-Token': token } }
 }
 
+export const walletList = () => (
+  axios.get('/wallets.json')
+)
+
 export const entryList = () => (
   axios.get('/entries.json')
 )

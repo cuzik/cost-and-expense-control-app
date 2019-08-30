@@ -126,6 +126,21 @@ class newFormEntry extends React.Component {
                 </div>
               </div>
             </div>
+
+            <div className="form-group">
+              <div className="form-row">
+                <div className="col">
+                  <label> Valor </label>
+                    <select>
+                      <option>asdasd</option>
+                      <option>asd</option>
+                      <option>asdaaa</option>
+                    </select>
+                </div>
+                <div className="col">
+                </div>
+              </div>
+            </div>
             <button type="submit" className="btn btn-primary">Enviar</button>
           </form>
         </div>

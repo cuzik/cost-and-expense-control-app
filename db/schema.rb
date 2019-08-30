@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2019_08_29_221900) do
 
   create_table "entries", force: :cascade do |t|
     t.string "description", default: "", null: false
-    t.datetime "due_date"
+    t.date "due_date"
     t.float "value", default: 0.0, null: false
     t.integer "kind", default: 0, null: false
     t.bigint "wallet_id", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2019_08_29_221900) do
   create_table "installments", force: :cascade do |t|
     t.string "description", default: "", null: false
     t.float "value", default: 0.0, null: false
-    t.datetime "due_date"
+    t.date "due_date"
     t.bigint "purchase_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
