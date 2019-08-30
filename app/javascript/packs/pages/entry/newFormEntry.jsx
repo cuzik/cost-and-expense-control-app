@@ -25,7 +25,8 @@ class newFormEntry extends React.Component {
       const { wallets} = res.data
 
       this.setState({
-        wallets
+        wallets,
+        walletId: wallets[0].id
       })
     })
   }
@@ -54,8 +55,7 @@ class newFormEntry extends React.Component {
         description: '',
         value: 0.0,
         dueDate: moment().format('YYYY-MM-DD'),
-        kind: 'debit',
-        walletId: ''
+        kind: 'debit'
       })
 
       this.props.handleChangeListBalance()
