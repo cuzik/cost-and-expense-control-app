@@ -5,34 +5,24 @@ import { walletList } from '../services/requests'
 
 const classItem = (item) => {
   if (item.kind == 'credit_card') {
-    return 'bg-warning'
+    return 'table-warning'
   } else if (item.kind == 'debit_card') {
-    return 'bg-info'
+    return 'table-info'
   } else if (item.kind == 'money') {
-    return 'bg-success'
+    return 'table-success'
   }
 
-  return 'secundary'
+  return 'table-secundary'
 }
 
 const WalletItem = ({ item }) => (
-  <div className="col-4">
-    <div className={"card " + classItem(item)}>
-      <div className="card-header">
-        {item.description}
-      </div>
-      <div className="card-body">
-        <ul>
-          <li> Saldo Anterior: <span className='float-right'> R$ {item.previous_balance} </span></li>
-          <li> Recebiso: <span className='float-right'> R$ {item.credited} </span></li>
-          <li> Gasto: <span className='float-right'> R$ - {item.debited} </span></li>
-        </ul>
-      </div>
-      <div className="card-footer">
-        Totol: <span className='float-right'> R$ {item.credited - item.debited} </span>
-      </div>
-    </div>
-  </div>
+  <tr className={classItem(item)}>
+    <td> {item.description} </td>
+    <td> R$ {item.previous_balance} </td>
+    <td> R$ {item.credited} </td>
+    <td> R$ {item.debited} </td>
+    <td> R$ {(item.credited - item.debited + item.previous_balance).toFixed(2)} </td>
+  </tr>
 )
 
 class WalletList extends React.Component {
@@ -60,8 +50,28 @@ class WalletList extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        {this.state.wallets.map((item) => <WalletItem key={item.id} item={item} /> )}
+      <div className="container">
+        <div className="card">
+          <div className="card-header">
+            <h5>Carteiras</h5>
+          </div>
+          <div className="card-body">
+            <table className="table table-bordered table-sm">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Anterior</th>
+                  <th>Recebido</th>
+                  <th>Gasto</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.wallets.map((item) => <WalletItem key={item.id} item={item} /> )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     )
   }

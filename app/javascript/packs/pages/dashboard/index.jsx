@@ -6,7 +6,6 @@ import Modal from 'react-responsive-modal'
 import BalanceCard from '../../component/BalanceCard'
 import { entryList } from '../../services/requests'
 import NewFormEntry from '../entry/newFormEntry'
-import DashboardHeader from './DashboardHeader'
 
 class DashboardIndex extends React.Component {
   constructor(props) {
@@ -57,8 +56,6 @@ class DashboardIndex extends React.Component {
     return (
       <React.Fragment>
         <br />
-        <DashboardHeader />
-        <br />
         <div className='container'>
           <div className="card">
             <div className="card-header">
@@ -91,7 +88,7 @@ class DashboardIndex extends React.Component {
             </div>
           </div>
         </div>
-
+        <br />
         <Modal open={this.state.openNewModal} onClose={this.onCloseModal} center>
           <NewFormEntry handleChangeListBalance={this.handleChangeListBalance}/>
         </Modal>

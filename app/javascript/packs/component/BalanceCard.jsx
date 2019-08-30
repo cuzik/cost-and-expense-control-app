@@ -10,26 +10,24 @@ const BalanceCardItem = ({ item, itemClasses }) => (
 )
 
 const BalanceCardList = ({ listBalance, itemClasses }) => (
-  <div className="list-group">
+  <div className="list-group list-group-flush">
     {listBalance.map((item, idx) => <BalanceCardItem key={idx} item={item} itemClasses={itemClasses} /> )}
   </div>
 )
 
 const BalanceCard = ({ listBalance, itemClasses }) => (
-  <div className="card">
-    <div className="card-body card-balance">
+  <div>
+    <div className="card-balance">
       <BalanceCardList listBalance={listBalance} itemClasses={itemClasses} />
     </div>
 
-    <div className="card-footer">
-      <div className="list-group">
-        <a className={itemClasses}>
-          Total
-          <span className='float-right'>
-            R$ {listBalance.reduce((total, item) => total + item.value, 0)}
-          </span>
-        </a>
-      </div>
+    <div className="list-group list-group-flush">
+      <a className={itemClasses}>
+        <strong>Total</strong>
+        <span className='float-right'>
+          <strong>R$ {listBalance.reduce((total, item) => total + item.value, 0).toFixed(2)}</strong>
+        </span>
+      </a>
     </div>
   </div>
 )

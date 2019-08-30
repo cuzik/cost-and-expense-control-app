@@ -29,7 +29,3 @@ Entry.create!(wallet: nubank, description: "Internet de Agosto", value: 89.22, k
 Entry.create!(wallet: nubank, description: "Água de Agosto", value: 168.63, kind: :debit, due_date: Time.parse('10-08-2019'))
 
 Entry.create!(wallet: bbc, description: "NuBank Agosto", value: 648.84, kind: :debit, due_date: Time.parse('11-08-2019'))
-
-
-Entry.create!(wallet: nuconta, description: "teste da funcionalidade", value: 460.50, kind: :credit, due_date: Time.parse('05-07-2019'))
-Entry.create!(wallet: nuconta, description: "teste da funcionalidade", value: 450.0, kind: :debit, due_date: Time.parse('05-07-2019'))

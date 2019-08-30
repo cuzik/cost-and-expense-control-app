@@ -15,7 +15,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    entry = current_user.entries.new(entry_params)
+    entry = current_user.wallets.find(entry_params[:wallet_id]).entries.new(entry_params)
 
     if entry.save
       render json: entry, status: :created
@@ -26,6 +26,6 @@ class EntriesController < ApplicationController
 
   private
     def entry_params
-      params.require(:entry).permit(:description, :due_date, :value, :kind)
+      params.require(:entry).permit(:description, :due_date, :value, :kind, :wallet_id)
     end
 end

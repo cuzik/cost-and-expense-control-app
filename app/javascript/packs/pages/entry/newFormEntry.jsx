@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-import { entryCreate } from '../../services/requests'
+import { entryCreate, walletList } from '../../services/requests'
 
 class newFormEntry extends React.Component {
   constructor(props) {
@@ -11,11 +11,23 @@ class newFormEntry extends React.Component {
       description: '',
       value: 0.0,
       dueDate: moment().format('YYYY-MM-DD'),
-      kind: 'debit'
+      kind: 'debit',
+      wallets: [],
+      walletId: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
+  }
+
+  componentDidMount() {
+    walletList().then((res) => {
+      const { wallets} = res.data
+
+      this.setState({
+        wallets
+      })
+    })
   }
 
   handleInputChange(event) {
@@ -33,7 +45,8 @@ class newFormEntry extends React.Component {
       description: this.state.description,
       value: this.state.value,
       due_date: this.state.dueDate,
-      kind: this.state.kind
+      kind: this.state.kind,
+      wallet_id: this.state.walletId
     }
 
     entryCreate(params).then(() =>{
@@ -41,7 +54,8 @@ class newFormEntry extends React.Component {
         description: '',
         value: 0.0,
         dueDate: moment().format('YYYY-MM-DD'),
-        kind: 'debit'
+        kind: 'debit',
+        walletId: ''
       })
 
       this.props.handleChangeListBalance()
@@ -74,28 +88,6 @@ class newFormEntry extends React.Component {
                   </label>
                 </div>
                 <div className="col">
-                  <div className="form-check form-check-inline">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="kind"
-                      value={this.state.kind}
-                      onChange={this.handleInputChange}
-                      id="credit"
-                      value="credit" />
-                    <label className="form-check-label" htmlFor="credit">Recebimento</label>
-                  </div>
-                  <div className="form-check form-check-inline">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="kind"
-                      value={this.state.kind}
-                      onChange={this.handleInputChange}
-                      id="debit"
-                      value="debit" />
-                    <label className="form-check-label" htmlFor="debit">Pagamento</label>
-                  </div>
                 </div>
               </div>
             </div>
@@ -130,14 +122,17 @@ class newFormEntry extends React.Component {
             <div className="form-group">
               <div className="form-row">
                 <div className="col">
-                  <label> Valor </label>
-                    <select>
-                      <option>asdasd</option>
-                      <option>asd</option>
-                      <option>asdaaa</option>
+                  <label> Carteira </label>
+                    <select value={this.state.walletId} name="walletId" className="form-control" onChange={this.handleInputChange}>
+                      {this.state.wallets.map((item) => <option key={item.id} value={item.id}>{item.description}</option>)}
                     </select>
                 </div>
                 <div className="col">
+                  <label> Tipo </label>
+                    <select value={this.state.kind} name="kind" className="form-control" onChange={this.handleInputChange}>
+                      <option value="debit">Pagamento</option>
+                      <option value="credit">Recebimento</option>
+                    </select>
                 </div>
               </div>
             </div>
