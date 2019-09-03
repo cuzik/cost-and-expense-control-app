@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import WalletList from '../../component/WalletList'
 import { walletList } from '../../services/requests'
+import Navbar from '../../component/Navbar'
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -37,6 +38,6 @@ class WalletIndex extends React.Component {
 }
 
 ReactDOM.render(
-  <WalletIndex />,
+  <Navbar contentPage={<WalletIndex />}/>,
   document.getElementById('wallet-index')
 )
