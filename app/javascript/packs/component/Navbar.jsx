@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Sidebar, Menu, Icon } from 'semantic-ui-react'
+import { Sidebar, Menu, Icon, Container } from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -23,7 +23,7 @@ class Navbar extends React.Component {
 
   render() {
     return(
-      <div>
+      <Container fluid className="page-index">
         <Sidebar.Pushable>
           <Sidebar
             as={Menu}
@@ -44,7 +44,7 @@ class Navbar extends React.Component {
               Dashboard
             </Menu.Item>
             <Menu.Item href='/wallets'>
-              <Icon name='btc'/>
+              <Icon name='dollar'/>
               Carteiras
             </Menu.Item>
           </Sidebar>
@@ -57,7 +57,7 @@ class Navbar extends React.Component {
             {this.props.contentPage}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-      </div>
+      </Container>
     )
   }
 }

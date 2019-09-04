@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-import { Grid, Segment, Divider, Header, Icon, Button, Container } from 'semantic-ui-react'
+import { Grid, Segment, Divider, Header, Icon } from 'semantic-ui-react'
 
 import BalanceCard from '../../component/BalanceCard'
-import WalletList from '../../component/WalletList'
-import { entryList, walletList, entryCreate } from '../../services/requests'
+import WalletsCard from '../../component/WalletsCard'
+import { entryList, wallets, entryCreate } from '../../services/requests'
 import Navbar from '../../component/Navbar'
 import NewEntryModal from '../../component/NewEntryModal'
 
@@ -36,8 +36,8 @@ class DashboardIndex extends React.Component {
     })
   }
 
-  setWalletLists() {
-    walletList().then((res) => {
+  setWalletsCards() {
+    wallets().then((res) => {
       const { wallets} = res.data
 
       this.setState({
@@ -48,7 +48,7 @@ class DashboardIndex extends React.Component {
 
   componentDidMount() {
     this.setBalanceLists()
-    this.setWalletLists()
+    this.setWalletsCards()
   }
 
   handleAddNewEntry(params) {
@@ -63,19 +63,13 @@ class DashboardIndex extends React.Component {
         <Grid.Row>
           <Grid.Column width={16}>
             <Segment>
-              <Divider horizontal>
-                <Header as='h3'>
-                  <Icon name='dashboard' />
-                  Dashboard
-                </Header>
-              </Divider>
+              <Divider horizontal> <Header as='h3'> <Icon name='dashboard' /> Dashboard </Header> </Divider>
             </Segment>
             <Grid columns={2} divided>
               <Grid.Row>
                 <Grid.Column width={3}>
-                  <WalletList wallets={this.state.wallets}/>
+                  <WalletsCard wallets={this.state.wallets}/>
                 </Grid.Column>
-
                 <Grid.Column width={13}>
                   <Segment>
                     <Grid>
@@ -91,31 +85,16 @@ class DashboardIndex extends React.Component {
                     <Grid columns={3} divided>
                       <Grid.Row>
                         <Grid.Column>
-                          <Divider horizontal>
-                            <Header as='h4'>
-                              <Icon name='exchange' />
-                              Recebimentos
-                            </Header>
-                          </Divider>
-                          <BalanceCard listBalance={this.state.balanceCredit} />
+                          <Divider horizontal> <Header as='h4'> <Icon name='exchange' /> Recebimentos </Header> </Divider>
+                          <BalanceCard listBalance={this.state.balanceCredit} color='positive' />
                         </Grid.Column>
                         <Grid.Column>
-                          <Divider horizontal>
-                            <Header as='h4'>
-                              <Icon name='exchange' />
-                              Pagamentos Previstos
-                            </Header>
-                          </Divider>
-                          <BalanceCard listBalance={this.state.balanceDebit} />
+                          <Divider horizontal> <Header as='h4'> <Icon name='exchange' /> Pagamentos Previstos </Header> </Divider>
+                          <BalanceCard listBalance={this.state.balanceDebit} color={'warning'} />
                         </Grid.Column>
                         <Grid.Column>
-                          <Divider horizontal>
-                            <Header as='h4'>
-                              <Icon name='exchange' />
-                              Pagamentos Realisados
-                            </Header>
-                          </Divider>
-                          <BalanceCard listBalance={this.state.balanceDebit} />
+                          <Divider horizontal> <Header as='h4'> <Icon name='exchange' /> Pagamentos Realisados </Header> </Divider>
+                          <BalanceCard listBalance={this.state.balanceDebit} color={'negative'} />
                         </Grid.Column>
                       </Grid.Row>
                     </Grid>

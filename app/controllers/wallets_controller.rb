@@ -7,6 +7,16 @@ class WalletsController < ApplicationController
     end
   end
 
+  def create
+    wallet = current_user.wallets.new(wallet_params)
+
+    if wallet.save
+      render json: wallet, status: :created
+    else
+      render json: wallet.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def serialize_wallets(start_on, ends_on)
@@ -24,9 +34,14 @@ class WalletsController < ApplicationController
       id: wallet.id,
       description: wallet.description,
       kind: wallet.kind,
+      amount: wallet.amount,
       previous_balance: credited_value - debited_value,
       credited: current_interval_entries.credit.map{ |entrie| entrie.value }.sum,
       debited: current_interval_entries.debit.map{ |entrie| entrie.value }.sum
     }
+  end
+
+  def wallet_params
+    params.require(:wallet).permit(:description, :kind, :amount)
   end
 end

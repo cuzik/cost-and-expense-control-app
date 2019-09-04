@@ -1,27 +1,27 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react'
 
-const BalanceCardItem = ({ item }) => (
-  <Table.Row>
+const BalanceCardItem = ({ item, color }) => (
+  <Table.Row className={color}>
     <Table.Cell>{item.description}</Table.Cell>
     <Table.Cell width={6}> R$ {item.value.toFixed(2)}</Table.Cell>
   </Table.Row>
 )
 
-const BalanceCard = ({ listBalance }) => (
+const BalanceCard = ({ listBalance, color }) => (
   <React.Fragment>
-    <Table>
+    <Table size='small' compact celled fixed singleLine>
       <Table.Body>
-        {listBalance.map((item, idx) => <BalanceCardItem key={idx} item={item} /> )}
+        {listBalance.map((item, idx) => <BalanceCardItem key={idx} item={item} color={color} /> )}
       </Table.Body>
     </Table>
 
-    <Table>
+    <Table size='small' compact celled fixed singleLine>
       <Table.Body>
-        <Table.Row>
+        <Table.Row className={color}>
           <Table.Cell>Total</Table.Cell>
           <Table.Cell width={6}>
-          R$ {listBalance.reduce((total, item) => total + item.value, 0).toFixed(2)}
+            R$ {listBalance.reduce((total, item) => total + item.value, 0).toFixed(2)}
           </Table.Cell>
         </Table.Row>
       </Table.Body>

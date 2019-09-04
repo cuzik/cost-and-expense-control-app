@@ -6,7 +6,7 @@ const getHeader = () => {
   return { headers: { 'X-CSRF-Token': token } }
 }
 
-export const walletList = () => (
+export const wallets = () => (
   axios.get('/wallets.json')
 )
 
@@ -15,5 +15,9 @@ export const entryList = () => (
 )
 
 export const entryCreate = params => (
-  axios.post('/entries.json', params, getHeader())
+  axios.post('/entries', params, getHeader())
+)
+
+export const walletCreate = params => (
+  axios.post('/wallets', params, getHeader())
 )

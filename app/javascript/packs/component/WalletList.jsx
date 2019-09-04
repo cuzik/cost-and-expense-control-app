@@ -1,33 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Grid, Segment, Label } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
-const WalletItem = ({ item }) => (
-  <Segment>
-    <Label attached='top'>
-      {item.description}
-      <span floated='right'>
-        R$ {(item.credited - item.debited + item.previous_balance).toFixed(2)}
-      </span>
-    </Label>
-
-    <Grid columns={2} divided>
-      <Grid.Row>
-        <Grid.Column> Recebido: </Grid.Column><Grid.Column> R$ {item.credited.toFixed(2)} </Grid.Column>
-        <Grid.Column> Gasto: </Grid.Column><Grid.Column> R$ {item.debited.toFixed(2)} </Grid.Column>
-        <Grid.Column> Acumulado: </Grid.Column><Grid.Column> R$ {item.previous_balance.toFixed(2)} </Grid.Column>
-      </Grid.Row>
-    </Grid>
-  </Segment>
+const WalletListItem = ({ item }) => (
+  <Table.Row>
+    <Table.Cell width={1}>{item.id}</Table.Cell>
+    <Table.Cell>{item.description}</Table.Cell>
+    <Table.Cell>{item.kind}</Table.Cell>
+    <Table.Cell width={5}> R$ {item.amount.toFixed(2)}</Table.Cell>
+  </Table.Row>
 )
 
 class WalletList extends React.Component {
   render() {
     return (
-      <div>
-        {this.props.wallets.map((item) => <WalletItem key={item.id} item={item} /> )}
-      </div>
+      <Table size='small' compact celled fixed singleLine>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell width={1}>ID</Table.HeaderCell>
+            <Table.HeaderCell>Descrição</Table.HeaderCell>
+            <Table.HeaderCell>Tipo</Table.HeaderCell>
+            <Table.HeaderCell width={5}>Valor Inicial</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {this.props.wallets.map((item, idx) => <WalletListItem key={idx} item={item} /> )}
+        </Table.Body>
+      </Table>
     )
   }
 }

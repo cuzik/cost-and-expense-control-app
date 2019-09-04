@@ -4,25 +4,23 @@ import PropTypes from 'prop-types'
 import { Button, Modal, Form, Select, Input } from 'semantic-ui-react'
 
 const kinds = [
-  {key: 'debit', value: 'debit', text: 'Débito'},
-  {key: 'credit', value: 'credit', text: 'Crédito'}
+  {key: 'debit_card', value: 'debit_card', text: 'Cartão de Débito'},
+  {key: 'credit_card', value: 'credit_card', text: 'Cartão de Crédto'},
+  {key: 'money', value: 'money', text: 'Dinheiro'}
 ]
 
-class NewEntryModal extends React.Component {
+class NewWalletModal extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       open: false,
       description: '',
-      value: 0.0,
-      dueDate: '',
-      kind: 'debit',
-      walletId: this.props.wallets.length === 0 ? '' : this.props.wallets[0].id
+      kind: 'debit_card',
+      amount: 0.0,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleSelectWalletChange = this.handleSelectWalletChange.bind(this)
     this.handleSelectKindChange = this.handleSelectKindChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -31,10 +29,8 @@ class NewEntryModal extends React.Component {
     this.state = {
       open: false,
       description: '',
-      value: 0.0,
-      dueDate: '',
-      kind: 'debit',
-      walletId: this.props.wallets.length === 0 ? '' : this.props.wallets[0].id
+      kind: 'debit_card',
+      amount: 0.0,
     }
   }
 
@@ -55,12 +51,6 @@ class NewEntryModal extends React.Component {
     })
   }
 
-  handleSelectWalletChange(event, {value}) {
-    this.setState({
-      walletId: value
-    })
-  }
-
   handleSelectKindChange(event, {value}) {
     this.setState({
       kind: value
@@ -70,21 +60,13 @@ class NewEntryModal extends React.Component {
   handleSubmit(event) {
     const params = {
       description: this.state.description,
-      value: this.state.value,
-      due_date: this.state.dueDate,
       kind: this.state.kind,
-      wallet_id: this.state.walletId
+      amount: this.state.amount
     }
 
-    this.props.handleAddNewEntry(params)
+    this.props.handleAddNewWallet(params)
     this.close()
     event.preventDefault()
-  }
-
-  preparWalletsCard = () => {
-    return this.props.wallets.map((item) => (
-      { key: item.id, value: item.id, text: item.description }
-    ))
   }
 
   render() {
@@ -97,10 +79,10 @@ class NewEntryModal extends React.Component {
         onClose={this.close}
         size='tiny'
         trigger={
-          <Button content='Novo Laçamento' floated='right' positive/>
+          <Button content='Nova Carteira' floated='right' positive/>
         }
       >
-        <Modal.Header>Adicionar Nova Entrada</Modal.Header>
+        <Modal.Header>Nova Carteira</Modal.Header>
         <Modal.Content>
           <Form size='tiny'>
             <Form.Group widths='equal'>
@@ -116,30 +98,15 @@ class NewEntryModal extends React.Component {
                 control={Input}
                 label='Valor'
                 type='number'
-                name='value'
+                name='amount'
                 placeholder='Valor'
-                value={this.state.value}
-                onChange={this.handleInputChange} />
-              <Form.Field
-                control={Input}
-                label='Vencimento'
-                type='date'
-                name='dueDate'
-                placeholder='Vencimento'
-                value={this.state.dueDate}
+                value={this.state.amount}
                 onChange={this.handleInputChange} />
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Field
                 control={Select}
-                label='Carteira'
-                name='wallet'
-                value={this.state.walletId}
-                options={this.preparWalletsCard()}
-                onChange={this.handleSelectWalletChange} />
-              <Form.Field
-                control={Select}
-                label='Pagamento/Recebimento'
+                label='Tipo de Carteira'
                 name='kind'
                 value={this.state.kind}
                 options={kinds}
@@ -155,13 +122,13 @@ class NewEntryModal extends React.Component {
   }
 }
 
-NewEntryModal.defaultProps = {
+NewWalletModal.defaultProps = {
   wallets: []
 }
 
-NewEntryModal.propTypes = {
+NewWalletModal.propTypes = {
   wallets: PropTypes.arrayOf(PropTypes.shape()),
-  handleAddNewEntry: PropTypes.func
+  handleAddNewWallet: PropTypes.func
 }
 
-export default NewEntryModal
+export default NewWalletModal

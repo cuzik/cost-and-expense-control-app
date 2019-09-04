@@ -25,7 +25,8 @@ class EntriesController < ApplicationController
   end
 
   private
-    def entry_params
-      params.require(:entry).permit(:description, :due_date, :value, :kind, :wallet_id)
-    end
+
+  def entry_params
+    params.require(:entry).permit(:description, :due_date, :value, :kind, :wallet_id)
+  end
 end
