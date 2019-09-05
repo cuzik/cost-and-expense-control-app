@@ -7,7 +7,7 @@ const WalletItem = ({ item }) => (
   <Segment>
     <Divider horizontal>
       <Header as='h5'>
-        {item.description} (R$ {(item.credited - item.debited + item.previous_balance).toFixed(2)})
+        {item.description} (R$ {(item.credited - item.debited + item.previous_balance + item.amount).toFixed(2)})
       </Header>
     </Divider>
 
@@ -15,7 +15,7 @@ const WalletItem = ({ item }) => (
       <Grid.Row>
         <Grid.Column> Recebido: </Grid.Column><Grid.Column> R$ {item.credited.toFixed(2)} </Grid.Column>
         <Grid.Column> Gasto: </Grid.Column><Grid.Column> R$ {item.debited.toFixed(2)} </Grid.Column>
-        <Grid.Column> Acumulado: </Grid.Column><Grid.Column> R$ {item.previous_balance.toFixed(2)} </Grid.Column>
+        <Grid.Column> Acumulado: </Grid.Column><Grid.Column> R$ {(item.previous_balance + item.amount).toFixed(2)} </Grid.Column>
       </Grid.Row>
     </Grid>
   </Segment>

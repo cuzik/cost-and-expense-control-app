@@ -8,7 +8,8 @@ class EntriesController < ApplicationController
           {
             entries: {
               credit: entries.order(id: :desc).credit,
-              debit: entries.order(id: :desc).debit
+              debit: entries.order(id: :desc).debit,
+              expected: []
             }
           },
           status: :ok }

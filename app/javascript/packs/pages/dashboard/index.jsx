@@ -21,6 +21,7 @@ class DashboardIndex extends React.Component {
       places: [],
       balanceCredit: props.balanceCredit,
       balanceDebit: props.balanceDebit,
+      balanceExpected: props.balanceExpected,
       wallets: [],
       starts_on: moment().startOf('month').format('YYYY-MM-DD'),
       ends_on: moment().endOf('month').format('YYYY-MM-DD'),
@@ -38,11 +39,12 @@ class DashboardIndex extends React.Component {
     }
 
     entries(params).then((res) => {
-      const { credit, debit } = res.data.entries
+      const { credit, debit, expected } = res.data.entries
 
       this.setState({
         balanceCredit: credit,
-        balanceDebit: debit
+        balanceDebit: debit,
+        balanceExpeted: expected
       })
     })
   }
@@ -144,7 +146,7 @@ class DashboardIndex extends React.Component {
                         </Grid.Column>
                         <Grid.Column>
                           <Divider horizontal> <Header as='h4'> <Icon name='exchange' /> Pagamentos Previstos </Header> </Divider>
-                          <BalanceCard listBalance={this.state.balanceDebit} color={'warning'} />
+                          <BalanceCard listBalance={this.state.balanceExpected} color={'warning'} />
                         </Grid.Column>
                         <Grid.Column>
                           <Divider horizontal> <Header as='h4'> <Icon name='exchange' /> Pagamentos Realisados </Header> </Divider>
@@ -166,12 +168,14 @@ class DashboardIndex extends React.Component {
 DashboardIndex.defaultProps = {
   balanceCredit: [],
   balanceDebit: [],
+  balanceExpected: [],
   wallets: []
 }
 
 DashboardIndex.propTypes = {
   balanceCredit: PropTypes.arrayOf(PropTypes.shape()),
   balanceDebit: PropTypes.arrayOf(PropTypes.shape()),
+  balanceExpected: PropTypes.arrayOf(PropTypes.shape()),
   wallets: PropTypes.arrayOf(PropTypes.shape())
 }
 
