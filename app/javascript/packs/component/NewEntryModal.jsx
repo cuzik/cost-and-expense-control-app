@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 import { Button, Modal, Form, Select, Input } from 'semantic-ui-react'
 
@@ -16,25 +17,27 @@ class NewEntryModal extends React.Component {
       open: false,
       description: '',
       value: 0.0,
-      dueDate: '',
+      dueDate: moment().format('YYYY-MM-DD'),
       kind: 'debit',
-      walletId: this.props.wallets.length === 0 ? '' : this.props.wallets[0].id
+      walletId: this.props.wallets.length === 0 ? '' : this.props.wallets[0].id,
+      placeId: this.props.places.length === 0 ? '' : this.props.places[0].id
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSelectWalletChange = this.handleSelectWalletChange.bind(this)
     this.handleSelectKindChange = this.handleSelectKindChange.bind(this)
+    this.handleSelectPlaceChange = this.handleSelectPlaceChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   cleanForm = () => {
     this.state = {
-      open: false,
       description: '',
       value: 0.0,
-      dueDate: '',
+      dueDate: moment().format('YYYY-MM-DD'),
       kind: 'debit',
-      walletId: this.props.wallets.length === 0 ? '' : this.props.wallets[0].id
+      walletId: this.props.wallets.length === 0 ? '' : this.props.wallets[0].id,
+      placeID: this.props.places.length === 0 ? '' : this.props.places[0].id
     }
   }
 
@@ -67,13 +70,20 @@ class NewEntryModal extends React.Component {
     })
   }
 
+  handleSelectPlaceChange(event, {value}) {
+    this.setState({
+      placeID: value
+    })
+  }
+
   handleSubmit(event) {
     const params = {
       description: this.state.description,
       value: this.state.value,
       due_date: this.state.dueDate,
       kind: this.state.kind,
-      wallet_id: this.state.walletId
+      wallet_id: this.state.walletId,
+      place_id: this.state.placeID
     }
 
     this.props.handleAddNewEntry(params)
@@ -81,9 +91,15 @@ class NewEntryModal extends React.Component {
     event.preventDefault()
   }
 
-  preparWalletsCard = () => {
+  formatWallets = () => {
     return this.props.wallets.map((item) => (
       { key: item.id, value: item.id, text: item.description }
+    ))
+  }
+
+  formatPlaces = () => {
+    return this.props.places.map((item) => (
+      { key: item.id, value: item.id, text: item.name }
     ))
   }
 
@@ -120,6 +136,8 @@ class NewEntryModal extends React.Component {
                 placeholder='Valor'
                 value={this.state.value}
                 onChange={this.handleInputChange} />
+            </Form.Group>
+            <Form.Group widths='equal'>
               <Form.Field
                 control={Input}
                 label='Vencimento'
@@ -128,15 +146,15 @@ class NewEntryModal extends React.Component {
                 placeholder='Vencimento'
                 value={this.state.dueDate}
                 onChange={this.handleInputChange} />
-            </Form.Group>
-            <Form.Group widths='equal'>
               <Form.Field
                 control={Select}
                 label='Carteira'
-                name='wallet'
+                name='walletID'
                 value={this.state.walletId}
-                options={this.preparWalletsCard()}
+                options={this.formatWallets()}
                 onChange={this.handleSelectWalletChange} />
+            </Form.Group>
+            <Form.Group widths='equal'>
               <Form.Field
                 control={Select}
                 label='Pagamento/Recebimento'
@@ -144,6 +162,13 @@ class NewEntryModal extends React.Component {
                 value={this.state.kind}
                 options={kinds}
                 onChange={this.handleSelectKindChange} />
+              <Form.Field
+                control={Select}
+                label='Lugar'
+                name='placeID'
+                value={this.state.placeID}
+                options={this.formatPlaces()}
+                onChange={this.handleSelectPlaceChange} />
             </Form.Group>
           </Form>
         </Modal.Content>
@@ -156,11 +181,13 @@ class NewEntryModal extends React.Component {
 }
 
 NewEntryModal.defaultProps = {
-  wallets: []
+  wallets: [],
+  places: []
 }
 
 NewEntryModal.propTypes = {
   wallets: PropTypes.arrayOf(PropTypes.shape()),
+  places: PropTypes.arrayOf(PropTypes.shape()),
   handleAddNewEntry: PropTypes.func
 }
 

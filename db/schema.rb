@@ -21,8 +21,10 @@ ActiveRecord::Schema.define(version: 2019_08_29_221900) do
     t.float "value", default: 0.0, null: false
     t.integer "kind", default: 0, null: false
     t.bigint "wallet_id", null: false
+    t.bigint "place_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_entries_on_place_id"
     t.index ["wallet_id"], name: "index_entries_on_wallet_id"
   end
 
@@ -34,6 +36,14 @@ ActiveRecord::Schema.define(version: 2019_08_29_221900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["purchase_id"], name: "index_installments_on_purchase_id"
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_places_on_user_id"
   end
 
   create_table "purchases", force: :cascade do |t|

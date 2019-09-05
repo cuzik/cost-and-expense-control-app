@@ -8,6 +8,6 @@ class User < ApplicationRecord
   validates :cpf, presence: true, uniqueness: { case_sensitive: false }
 
   has_many :wallets
-
+  has_many :places
   has_many :entries, through: :wallets
 end

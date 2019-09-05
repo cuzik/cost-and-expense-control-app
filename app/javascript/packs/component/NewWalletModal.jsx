@@ -122,12 +122,7 @@ class NewWalletModal extends React.Component {
   }
 }
 
-NewWalletModal.defaultProps = {
-  wallets: []
-}
-
 NewWalletModal.propTypes = {
-  wallets: PropTypes.arrayOf(PropTypes.shape()),
   handleAddNewWallet: PropTypes.func
 }
 

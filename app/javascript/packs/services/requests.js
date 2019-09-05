@@ -10,8 +10,12 @@ export const wallets = () => (
   axios.get('/wallets.json')
 )
 
-export const entryList = () => (
-  axios.get('/entries.json')
+export const entries = params => (
+  axios.get('/entries.json', { params })
+)
+
+export const places = () => (
+  axios.get('/places.json')
 )
 
 export const entryCreate = params => (
@@ -20,4 +24,8 @@ export const entryCreate = params => (
 
 export const walletCreate = params => (
   axios.post('/wallets', params, getHeader())
+)
+
+export const placeCreate = params => (
+  axios.post('/places', params, getHeader())
 )

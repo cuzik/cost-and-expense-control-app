@@ -19,13 +19,13 @@ class WalletsController < ApplicationController
 
   private
 
-  def serialize_wallets(start_on, ends_on)
-    current_user.wallets.map{ |wallet| serialize_wallet(start_on, ends_on, wallet) }
+  def serialize_wallets(starts_on, ends_on)
+    current_user.wallets.map{ |wallet| serialize_wallet(starts_on, ends_on, wallet) }
   end
 
-  def serialize_wallet(start_on, ends_on, wallet)
-    entries_on_the_past = wallet.entries.where("due_date < ?", start_on)
-    current_interval_entries = wallet.entries.where("due_date >= ? AND due_date <= ?", start_on, ends_on)
+  def serialize_wallet(starts_on, ends_on, wallet)
+    entries_on_the_past = wallet.entries.where("due_date < ?", starts_on)
+    current_interval_entries = wallet.entries.where("due_date >= ? AND due_date <= ?", starts_on, ends_on)
 
     credited_value = entries_on_the_past.credit.map{ |entrie| entrie.value }.sum
     debited_value = entries_on_the_past.debit.map{ |entrie| entrie.value }.sum

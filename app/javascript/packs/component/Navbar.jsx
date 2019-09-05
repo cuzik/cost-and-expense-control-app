@@ -47,6 +47,10 @@ class Navbar extends React.Component {
               <Icon name='dollar'/>
               Carteiras
             </Menu.Item>
+            <Menu.Item href='/places'>
+              <Icon name='home'/>
+              Local
+            </Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={this.state.visible}>

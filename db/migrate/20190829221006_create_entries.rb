@@ -7,6 +7,7 @@ class CreateEntries < ActiveRecord::Migration[5.2]
       t.integer :kind, null: false, default: 0
 
       t.belongs_to :wallet, index: true, null: false
+      t.belongs_to :place, index: true, null: false
 
       t.timestamps
     end

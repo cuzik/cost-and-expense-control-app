@@ -1,12 +1,14 @@
 class EntriesController < ApplicationController
   def index
+    entries = current_user.entries.where("due_date >= ? AND due_date <= ?", starts_on, ends_on)
+
     respond_to do |format|
       format.json {
         render json:
           {
             entries: {
-              credit: current_user.entries.order(id: :desc).credit,
-              debit: current_user.entries.order(id: :desc).debit
+              credit: entries.order(id: :desc).credit,
+              debit: entries.order(id: :desc).debit
             }
           },
           status: :ok }
@@ -26,7 +28,19 @@ class EntriesController < ApplicationController
 
   private
 
+  def starts_on
+    return params[:starts_on] if params[:starts_on].present?
+
+    Time.current.beginning_of_month
+  end
+
+  def ends_on
+    return params[:ends_on] if params[:ends_on].present?
+
+    Time.current.end_of_month
+  end
+
   def entry_params
-    params.require(:entry).permit(:description, :due_date, :value, :kind, :wallet_id)
+    params.require(:entry).permit(:description, :due_date, :value, :kind, :wallet_id, :place_id)
   end
 end

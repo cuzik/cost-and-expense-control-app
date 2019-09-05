@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
-import { Grid, Segment, Divider, Header, Icon } from 'semantic-ui-react'
+import { Grid, Segment, Divider, Header, Icon, Form, Input, Button } from 'semantic-ui-react'
 
 import BalanceCard from '../../component/BalanceCard'
 import WalletsCard from '../../component/WalletsCard'
-import { entryList, wallets, entryCreate } from '../../services/requests'
+import { entries, wallets, entryCreate, places } from '../../services/requests'
 import Navbar from '../../component/Navbar'
 import NewEntryModal from '../../component/NewEntryModal'
 
@@ -17,16 +18,26 @@ class DashboardIndex extends React.Component {
     super(props)
 
     this.state = {
+      places: [],
       balanceCredit: props.balanceCredit,
       balanceDebit: props.balanceDebit,
-      wallets: props.balanceDebit
+      wallets: [],
+      starts_on: moment().startOf('month').format('YYYY-MM-DD'),
+      ends_on: moment().endOf('month').format('YYYY-MM-DD'),
     }
 
     this.handleAddNewEntry = this.handleAddNewEntry.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   setBalanceLists() {
-    entryList().then((res) => {
+    const params = {
+      starts_on: this.state.starts_on,
+      ends_on: this.state.ends_on
+    }
+
+    entries(params).then((res) => {
       const { credit, debit } = res.data.entries
 
       this.setState({
@@ -36,7 +47,17 @@ class DashboardIndex extends React.Component {
     })
   }
 
-  setWalletsCards() {
+  setPlaces() {
+    places().then((res) => {
+      const { places } = res.data
+
+      this.setState({
+        places
+      })
+    })
+  }
+
+  setWallets() {
     wallets().then((res) => {
       const { wallets} = res.data
 
@@ -48,13 +69,23 @@ class DashboardIndex extends React.Component {
 
   componentDidMount() {
     this.setBalanceLists()
-    this.setWalletsCards()
+    this.setWallets()
+    this.setPlaces()
   }
 
   handleAddNewEntry(params) {
     entryCreate(params).then((res) => {
       this.setBalanceLists()
     })
+  }
+
+  handleInputChange(event, { name, value }) {
+    this.setState({ [name]: value })
+  }
+
+  handleSubmit(event) {
+    console.log(this.state.starts_on, this.state.ends_on)
+    this.setBalanceLists()
   }
 
   render() {
@@ -74,9 +105,32 @@ class DashboardIndex extends React.Component {
                   <Segment>
                     <Grid>
                       <Grid.Row>
-                        <Grid.Column>
-                          Bagulho de selecionar o mês / ano
-                          <NewEntryModal wallets={this.state.wallets} handleAddNewEntry={this.handleAddNewEntry} />
+                        <Grid.Column width={8}>
+                          <Form>
+                            <Form.Group widths='equal' inline>
+                              <Form.Field
+                                control={Input}
+                                type='date'
+                                name='starts_on'
+                                placeholder='Inicio'
+                                value={this.state.starts_on}
+                                onChange={this.handleInputChange} />
+                              <Form.Field
+                                control={Input}
+                                type='date'
+                                name='ends_on'
+                                placeholder='Fim'
+                                value={this.state.ends_on}
+                                onChange={this.handleInputChange} />
+                              <Button onClick={this.handleSubmit}>Ok</Button>
+                            </Form.Group>
+                          </Form>
+                        </Grid.Column>
+                        <Grid.Column width={8}>
+                          <NewEntryModal
+                            wallets={this.state.wallets}
+                            handleAddNewEntry={this.handleAddNewEntry}
+                            places={this.state.places} />
                         </Grid.Column>
                       </Grid.Row>
                     </Grid>

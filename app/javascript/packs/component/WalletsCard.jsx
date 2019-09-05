@@ -7,8 +7,7 @@ const WalletItem = ({ item }) => (
   <Segment>
     <Divider horizontal>
       <Header as='h5'>
-        {item.description}
-        R$ {(item.credited - item.debited + item.previous_balance).toFixed(2)}
+        {item.description} (R$ {(item.credited - item.debited + item.previous_balance).toFixed(2)})
       </Header>
     </Divider>
 
