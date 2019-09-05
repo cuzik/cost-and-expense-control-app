@@ -9,6 +9,12 @@ import NewWalletModal from '../../component/NewWalletModal'
 
 import 'semantic-ui-css/semantic.min.css'
 
+const kinds = [
+  {key: 'debit_card', value: 'debit_card', text: 'Cartão de Débito'},
+  {key: 'credit_card', value: 'credit_card', text: 'Cartão de Crédto'},
+  {key: 'money', value: 'money', text: 'Dinheiro'}
+]
+
 class WalletIndex extends React.Component {
   constructor(props) {
     super(props)
@@ -45,30 +51,30 @@ class WalletIndex extends React.Component {
       <Grid celled='internally'>
         <Grid.Row>
           <Grid.Column width={16}>
-            <Segment>
+            <Segment color='black'>
               <Divider horizontal> <Header as='h3'> <Icon name='dollar' /> Carteiras </Header> </Divider>
             </Segment>
 
             <Grid columns={2} divided>
               <Grid.Row>
                 <Grid.Column width={3}>
-                  <Segment>
+                  <Segment color='black'>
                     colocarei alguma coisa aqui
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={13}>
-                  <Segment>
+                  <Segment color='black'>
                     <Grid>
                       <Grid.Row>
                         <Grid.Column>
                           Descrição dessa página
-                          <NewWalletModal handleAddNewWallet={this.handleAddNewWallet} />
+                          <NewWalletModal handleAddNewWallet={this.handleAddNewWallet} kinds={kinds} />
                         </Grid.Column>
                       </Grid.Row>
                     </Grid>
                   </Segment>
-                  <Segment>
-                    <WalletList wallets={this.state.wallets}/>
+                  <Segment color='black'>
+                    <WalletList wallets={this.state.wallets} kinds={kinds} />
                   </Segment>
                 </Grid.Column>
               </Grid.Row>

@@ -45,19 +45,19 @@ class PlaceIndex extends React.Component {
       <Grid celled='internally'>
         <Grid.Row>
           <Grid.Column width={16}>
-            <Segment>
+            <Segment color='black'>
               <Divider horizontal> <Header as='h3'> <Icon name='home' /> Lugares </Header> </Divider>
             </Segment>
 
             <Grid columns={2} divided>
               <Grid.Row>
                 <Grid.Column width={3}>
-                  <Segment>
+                  <Segment color='black'>
                     colocarei alguma carlos
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={13}>
-                  <Segment>
+                  <Segment color='black'>
                     <Grid>
                       <Grid.Row>
                         <Grid.Column>
@@ -67,7 +67,7 @@ class PlaceIndex extends React.Component {
                       </Grid.Row>
                     </Grid>
                   </Segment>
-                  <Segment>
+                  <Segment color='black'>
                     <PlaceList places={this.state.places}/>
                   </Segment>
                 </Grid.Column>

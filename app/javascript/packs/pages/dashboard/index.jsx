@@ -10,6 +10,7 @@ import WalletsCard from '../../component/WalletsCard'
 import { entries, wallets, entryCreate, places } from '../../services/requests'
 import Navbar from '../../component/Navbar'
 import NewEntryModal from '../../component/NewEntryModal'
+import ProgressFlow from '../../component/ProgressFlow'
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -22,6 +23,8 @@ class DashboardIndex extends React.Component {
       balanceCredit: props.balanceCredit,
       balanceDebit: props.balanceDebit,
       balanceExpected: props.balanceExpected,
+      flow_input: 0,
+      flow_output: 0,
       wallets: [],
       starts_on: moment().startOf('month').format('YYYY-MM-DD'),
       ends_on: moment().endOf('month').format('YYYY-MM-DD'),
@@ -39,12 +42,14 @@ class DashboardIndex extends React.Component {
     }
 
     entries(params).then((res) => {
-      const { credit, debit, expected } = res.data.entries
+      const { credit, debit, expected, flow } = res.data.entries
 
       this.setState({
         balanceCredit: credit,
         balanceDebit: debit,
-        balanceExpeted: expected
+        balanceExpeted: expected,
+        flow_input: flow.input,
+        flow_output: flow.output
       })
     })
   }
@@ -95,7 +100,7 @@ class DashboardIndex extends React.Component {
       <Grid celled='internally'>
         <Grid.Row>
           <Grid.Column width={16}>
-            <Segment>
+            <Segment color='black'>
               <Divider horizontal> <Header as='h3'> <Icon name='dashboard' /> Dashboard </Header> </Divider>
             </Segment>
             <Grid columns={2} divided>
@@ -104,7 +109,7 @@ class DashboardIndex extends React.Component {
                   <WalletsCard wallets={this.state.wallets}/>
                 </Grid.Column>
                 <Grid.Column width={13}>
-                  <Segment>
+                  <Segment color='black'>
                     <Grid>
                       <Grid.Row>
                         <Grid.Column width={8}>
@@ -137,7 +142,12 @@ class DashboardIndex extends React.Component {
                       </Grid.Row>
                     </Grid>
                   </Segment>
-                  <Segment>
+
+                  <Segment color='black'>
+                    <ProgressFlow flow_input={this.state.flow_input} flow_output={this.state.flow_output}/>
+                  </Segment>
+
+                  <Segment color='black'>
                     <Grid columns={3} divided>
                       <Grid.Row>
                         <Grid.Column>

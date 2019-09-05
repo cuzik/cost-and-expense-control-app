@@ -9,7 +9,11 @@ class EntriesController < ApplicationController
             entries: {
               credit: entries.order(id: :desc).credit,
               debit: entries.order(id: :desc).debit,
-              expected: []
+              expected: [],
+              flow: {
+                input: entries.where(wallet: current_user.wallets.where(kind: %i[debit_card money])).credit.map {|entry| entry.value }.reduce(0, :+),
+                output: entries.debit.map {|entry| entry.value }.reduce(0, :+)
+              }
             }
           },
           status: :ok }

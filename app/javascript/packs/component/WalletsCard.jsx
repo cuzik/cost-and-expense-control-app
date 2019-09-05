@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Grid, Segment, Divider, Header} from 'semantic-ui-react'
 
 const WalletItem = ({ item }) => (
-  <Segment>
+  <Segment color='black'>
     <Divider horizontal>
       <Header as='h5'>
         {item.description} (R$ {(item.credited - item.debited + item.previous_balance + item.amount).toFixed(2)})

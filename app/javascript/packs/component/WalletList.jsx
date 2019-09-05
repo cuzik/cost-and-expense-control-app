@@ -3,16 +3,26 @@ import PropTypes from 'prop-types'
 
 import { Table } from 'semantic-ui-react'
 
-const WalletListItem = ({ item }) => (
+const WalletListItem = ({ item, kinds }) => (
   <Table.Row>
     <Table.Cell width={1}>{item.id}</Table.Cell>
     <Table.Cell>{item.description}</Table.Cell>
-    <Table.Cell>{item.kind}</Table.Cell>
+    <Table.Cell>{kinds[item.kind]}</Table.Cell>
     <Table.Cell width={5}> R$ {item.amount.toFixed(2)}</Table.Cell>
   </Table.Row>
 )
 
 class WalletList extends React.Component {
+  formatKind = () => {
+    let kinds = {}
+
+    this.props.kinds.map((item) => (
+      kinds[item.key] = item.text
+    ))
+
+    return kinds
+  }
+
   render() {
     return (
       <Table size='small' compact celled fixed singleLine>
@@ -26,7 +36,7 @@ class WalletList extends React.Component {
         </Table.Header>
 
         <Table.Body>
-          {this.props.wallets.map((item, idx) => <WalletListItem key={idx} item={item} /> )}
+          {this.props.wallets.map((item, idx) => <WalletListItem key={idx} item={item} kinds={this.formatKind()} /> )}
         </Table.Body>
       </Table>
     )
@@ -34,11 +44,13 @@ class WalletList extends React.Component {
 }
 
 WalletList.defaultProps = {
-  wallets: []
+  wallets: [],
+  kinds: []
 }
 
 WalletList.propTypes = {
-  wallets: PropTypes.arrayOf(PropTypes.shape())
+  wallets: PropTypes.arrayOf(PropTypes.shape()),
+  kinds: PropTypes.arrayOf(PropTypes.shape())
 }
 
 export default WalletList

@@ -1,11 +1,14 @@
-user = User.create!(
-  name: "User de Test",
-  email: "user@mail.com",
-  cpf: "093.092.619-60",
-  password: "nopasswd"
-)
+# user = User.create!(
+#   name: "User de Test",
+#   email: "user@mail.com",
+#   cpf: "093.092.619-60",
+#   password: "nopasswd"
+# )
 
-outros = Place.create(user: user, name: "Outros")
+user = User.first
+outros = Place.first
+
+# outros = Place.create(user: user, name: "Outros")
 magrathea = Place.create(user: user, name: "Magrathea Labs")
 mercado = Place.create(user: user, name: "Mercado")
 fliperama = Place.create(user: user, name: "Fliperama")
@@ -38,7 +41,7 @@ pai = Place.create(user: user, name: "Pai")
 nuconta = Wallet.create!(user: user, description: "NuConta", kind: :debit_card, amount: 0.0)
 bb_debito = Wallet.create!(user: user, description: "B&B Débito", kind: :debit_card, amount: 0)
 nubank = Wallet.create!(user: user, description: "NuBank", kind: :credit_card, amount: 0.96)
-bb_credito = Wallet.create!(user: user, description: "B&B Crédito", kind: :credit_card, amount: 0)
+bb_credito = Wallet.create!(user: user, description: "B&B Crédito", kind: :credit_card, amount: 1.16)
 dinheiro = Wallet.create!(user: user, description: "Dinheiro", kind: :money, amount: 0)
 sodexo = Wallet.create!(user: user, description: "Vale Alimentação", kind: :debit_card, amount: 1.15)
 

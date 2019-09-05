@@ -3,12 +3,6 @@ import PropTypes from 'prop-types'
 
 import { Button, Modal, Form, Select, Input } from 'semantic-ui-react'
 
-const kinds = [
-  {key: 'debit_card', value: 'debit_card', text: 'Cartão de Débito'},
-  {key: 'credit_card', value: 'credit_card', text: 'Cartão de Crédto'},
-  {key: 'money', value: 'money', text: 'Dinheiro'}
-]
-
 class NewWalletModal extends React.Component {
   constructor(props) {
     super(props)
@@ -109,7 +103,7 @@ class NewWalletModal extends React.Component {
                 label='Tipo de Carteira'
                 name='kind'
                 value={this.state.kind}
-                options={kinds}
+                options={this.props.kinds}
                 onChange={this.handleSelectKindChange} />
             </Form.Group>
           </Form>
@@ -122,8 +116,13 @@ class NewWalletModal extends React.Component {
   }
 }
 
+NewWalletModal.defaultProps = {
+  kinds: []
+}
+
 NewWalletModal.propTypes = {
-  handleAddNewWallet: PropTypes.func
+  handleAddNewWallet: PropTypes.func,
+  kinds: PropTypes.arrayOf(PropTypes.shape())
 }
 
 export default NewWalletModal
