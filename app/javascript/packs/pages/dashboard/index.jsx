@@ -2,8 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import 'moment/locale/pt-br';
 
 import { Grid, Segment, Divider, Header, Icon, Form, Input, Button } from 'semantic-ui-react'
+import { YearInput, MonthInput } from 'semantic-ui-calendar-react';
+
 
 import BalanceCard from '../../component/BalanceCard'
 import WalletsCard from '../../component/WalletsCard'
@@ -26,8 +29,8 @@ class DashboardIndex extends React.Component {
       flow_input: 0,
       flow_output: 0,
       wallets: [],
-      starts_on: moment().startOf('month').format('YYYY-MM-DD'),
-      ends_on: moment().endOf('month').format('YYYY-MM-DD'),
+      year: moment().format("YYYY"),
+      month: moment().format("MMMM")
     }
 
     this.handleAddNewEntry = this.handleAddNewEntry.bind(this)
@@ -36,9 +39,12 @@ class DashboardIndex extends React.Component {
   }
 
   setBalanceLists() {
+    const starts_on = moment(this.state.month + " " + this.state.year, 'MMMM YYYY', 'pt-br').startOf('month').format('YYYY-MM-DD')
+    const ends_on = moment(this.state.month + " " + this.state.year, 'MMMM YYYY', 'pt-br').endOf('month').format('YYYY-MM-DD')
+
     const params = {
-      starts_on: this.state.starts_on,
-      ends_on: this.state.ends_on
+      starts_on: starts_on,
+      ends_on: ends_on
     }
 
     entries(params).then((res) => {
@@ -91,7 +97,6 @@ class DashboardIndex extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(this.state.starts_on, this.state.ends_on)
     this.setBalanceLists()
   }
 
@@ -115,20 +120,26 @@ class DashboardIndex extends React.Component {
                         <Grid.Column width={8}>
                           <Form>
                             <Form.Group widths='equal' inline>
-                              <Form.Field
-                                control={Input}
-                                type='date'
-                                name='starts_on'
-                                placeholder='Inicio'
-                                value={this.state.starts_on}
-                                onChange={this.handleInputChange} />
-                              <Form.Field
-                                control={Input}
-                                type='date'
-                                name='ends_on'
-                                placeholder='Fim'
-                                value={this.state.ends_on}
-                                onChange={this.handleInputChange} />
+                              <YearInput
+                                closable
+                                name="year"
+                                popupPosition='bottom right'
+                                placeholder="Ano"
+                                duration={0}
+                                value={this.state.year}
+                                onChange={this.handleInputChange}
+                              />
+                              <MonthInput
+                                closable
+                                name="month"
+                                popupPosition='bottom right'
+                                localization='pt-br'
+                                dateFormat='MMMM'
+                                duration={0}
+                                placeholder="Mês"
+                                value={this.state.month}
+                                onChange={this.handleInputChange}
+                              />
                               <Button onClick={this.handleSubmit}>Ok</Button>
                             </Form.Group>
                           </Form>

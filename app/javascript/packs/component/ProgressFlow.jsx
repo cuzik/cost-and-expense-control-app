@@ -5,11 +5,11 @@ import { Segment, Grid } from 'semantic-ui-react'
 const ResultFlow = ({ flow_input, flow_output }) => {
   if (flow_input >= flow_output) {
     return (
-      <Segment secundary inverted color='blue'> R$ {flow_output - flow_input} </Segment>
+      <Segment secondary inverted color='blue'> R$ {(flow_output - flow_input).toFixed(2)} </Segment>
     )
   } else {
     return (
-      <Segment secundary inverted color='red'> R$ {flow_input - flow_output} </Segment>
+      <Segment secondary inverted color='red'> R$ {(flow_input - flow_output).toFixed(2)} </Segment>
     )
   }
 }
@@ -27,9 +27,9 @@ ResultFlow.propTypes = {
 const ProgressFlow = ({ flow_input, flow_output }) => (
   <Grid columns={5}>
     <Grid.Row>
-      <Grid.Column> <Segment secundary inverted color='green'> R$ {flow_input} </Segment> </Grid.Column>
+      <Grid.Column> <Segment secondary inverted color='green'> R$ {flow_input.toFixed(2)} </Segment> </Grid.Column>
       <Grid.Column width={1}> <Segment> / </Segment> </Grid.Column>
-      <Grid.Column> <Segment secundary inverted color='yellow'> R$ {flow_output} </Segment> </Grid.Column>
+      <Grid.Column> <Segment secondary inverted color='yellow'> R$ {flow_output.toFixed(2)} </Segment> </Grid.Column>
       <Grid.Column width={1}> <Segment> = </Segment> </Grid.Column>
       <Grid.Column> <ResultFlow flow_input={flow_input} flow_output={flow_output} /> </Grid.Column>
     </Grid.Row>
