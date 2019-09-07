@@ -13,7 +13,7 @@ import WalletsCard from '../../component/WalletsCard'
 import { entries, wallets, entryCreate, places } from '../../services/requests'
 import Navbar from '../../component/Navbar'
 import NewEntryModal from '../../component/NewEntryModal'
-import ProgressFlow from '../../component/ProgressFlow'
+import BalanceResume from '../../component/BalanceResume'
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -114,16 +114,17 @@ class DashboardIndex extends React.Component {
                   <WalletsCard wallets={this.state.wallets}/>
                 </Grid.Column>
                 <Grid.Column width={13}>
-                  <Segment color='black'>
-                    <Grid>
-                      <Grid.Row>
-                        <Grid.Column width={8}>
-                          <Form>
+                  <Grid divided>
+                    <Grid.Row>
+                      <Grid.Column width={8}>
+                        <Segment color='black'>
+                          <Form size='tiny'>
                             <Form.Group widths='equal' inline>
                               <YearInput
                                 closable
                                 name="year"
                                 popupPosition='bottom right'
+                                icon="calendar alternate outline"
                                 placeholder="Ano"
                                 duration={0}
                                 value={this.state.year}
@@ -133,6 +134,7 @@ class DashboardIndex extends React.Component {
                                 closable
                                 name="month"
                                 popupPosition='bottom right'
+                                icon="calendar alternate outline"
                                 localization='pt-br'
                                 dateFormat='MMMM'
                                 duration={0}
@@ -140,11 +142,26 @@ class DashboardIndex extends React.Component {
                                 value={this.state.month}
                                 onChange={this.handleInputChange}
                               />
-                              <Button onClick={this.handleSubmit}>Ok</Button>
+                              <Form.Button icon labelPosition='left' onClick={this.handleSubmit}> Ok <Icon name='search' /> </Form.Button>
                             </Form.Group>
                           </Form>
+                        </Segment>
                         </Grid.Column>
-                        <Grid.Column width={8}>
+                      <Grid.Column width={8}>
+                        <Segment color='black'>
+                          <BalanceResume flow_input={this.state.flow_input} flow_output={this.state.flow_output}/>
+                        </Segment>
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+
+                  <Segment color='black'>
+                    <Grid>
+                      <Grid.Row>
+                        <Grid.Column width={14}>
+                          <Divider horizontal> <Header as='h3'> <Icon name='plus' /> Fechamento Parcial </Header> </Divider>
+                        </Grid.Column>
+                        <Grid.Column width={2}>
                           <NewEntryModal
                             wallets={this.state.wallets}
                             handleAddNewEntry={this.handleAddNewEntry}
@@ -152,13 +169,6 @@ class DashboardIndex extends React.Component {
                         </Grid.Column>
                       </Grid.Row>
                     </Grid>
-                  </Segment>
-
-                  <Segment color='black'>
-                    <ProgressFlow flow_input={this.state.flow_input} flow_output={this.state.flow_output}/>
-                  </Segment>
-
-                  <Segment color='black'>
                     <Grid columns={3} divided>
                       <Grid.Row>
                         <Grid.Column>

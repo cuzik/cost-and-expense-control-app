@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import 'moment/locale/pt-br';
 
-import { Button, Modal, Form, Select, Input } from 'semantic-ui-react'
+import { DateInput } from 'semantic-ui-calendar-react';
+import { Button, Modal, Form, Select, Input, Icon } from 'semantic-ui-react'
 
 const kinds = [
   {key: 'debit', value: 'debit', text: 'Débito'},
@@ -17,7 +19,7 @@ class NewEntryModal extends React.Component {
       open: false,
       description: '',
       value: 0.0,
-      dueDate: moment().format('YYYY-MM-DD'),
+      dueDate: moment().format('DD-MM-YYYY'),
       kind: 'debit',
       walletId: this.props.wallets.length === 0 ? '' : this.props.wallets[0].id,
       placeId: this.props.places.length === 0 ? '' : this.props.places[0].id
@@ -34,7 +36,7 @@ class NewEntryModal extends React.Component {
     this.state = {
       description: '',
       value: 0.0,
-      dueDate: moment().format('YYYY-MM-DD'),
+      dueDate: moment().format('DD-MM-YYYY'),
       kind: 'debit',
       walletId: this.props.wallets.length === 0 ? '' : this.props.wallets[0].id,
       placeID: this.props.places.length === 0 ? '' : this.props.places[0].id
@@ -48,14 +50,8 @@ class NewEntryModal extends React.Component {
     this.setState({ open: false })
   }
 
-  handleInputChange(event) {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
-
-    this.setState({
-      [name]: value
-    })
+  handleInputChange(event, { name, value }) {
+    this.setState({ [name]: value })
   }
 
   handleSelectWalletChange(event, {value}) {
@@ -113,7 +109,10 @@ class NewEntryModal extends React.Component {
         onClose={this.close}
         size='tiny'
         trigger={
-          <Button content='Novo Laçamento' floated='right' positive/>
+          <Button icon labelPosition='left' positive floated='right'>
+            Entrada
+            <Icon name='plus' />
+          </Button>
         }
       >
         <Modal.Header>Adicionar Nova Entrada</Modal.Header>
@@ -138,12 +137,15 @@ class NewEntryModal extends React.Component {
                 onChange={this.handleInputChange} />
             </Form.Group>
             <Form.Group widths='equal'>
-              <Form.Field
-                control={Input}
+              <DateInput
                 label='Vencimento'
-                type='date'
-                name='dueDate'
-                placeholder='Vencimento'
+                closable
+                name="dueDate"
+                popupPosition='bottom right'
+                iconPosition="left"
+                icon="calendar alternate outline"
+                localization='pt-br'
+                duration={0}
                 value={this.state.dueDate}
                 onChange={this.handleInputChange} />
               <Form.Field

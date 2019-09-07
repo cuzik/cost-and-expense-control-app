@@ -1,14 +1,11 @@
-# user = User.create!(
-#   name: "User de Test",
-#   email: "user@mail.com",
-#   cpf: "093.092.619-60",
-#   password: "nopasswd"
-# )
+user = User.create!(
+  name: "User de Test",
+  email: "user@mail.com",
+  cpf: "093.092.619-60",
+  password: "nopasswd"
+)
 
-user = User.first
-outros = Place.first
-
-# outros = Place.create(user: user, name: "Outros")
+outros = Place.create(user: user, name: "Outros")
 magrathea = Place.create(user: user, name: "Magrathea Labs")
 mercado = Place.create(user: user, name: "Mercado")
 fliperama = Place.create(user: user, name: "Fliperama")
@@ -82,6 +79,9 @@ Entry.create!(due_date: "05/09/2019", value: 500.00, wallet: nuconta, place: pai
 Entry.create!(due_date: "05/09/2019", value: 8.80, wallet: nubank, place: p_99_taxi, description: "Ida pro Trabalho Mês Passado", kind: :debit)
 Entry.create!(due_date: "05/09/2019", value: 16.71, wallet: sodexo, place: mercado, description: "Mantimentos", kind: :debit)
 Entry.create!(due_date: "05/09/2019", value: 9.99, wallet: nubank, place: farmacia, description: "Paracetamol", kind: :debit)
-# Entry.create!(due_date: "05/09/2019", value: 630.00, wallet: nubank, place: picpay, description: "Fatura Nubank", kind: :credit)
+Entry.create!(due_date: "06/09/2019", value: 3.90, wallet: nubank, place: outros, description: "cache", kind: :debit)
 Entry.create!(due_date: "05/09/2019", value: 2_597.64, wallet: nuconta, place: magrathea, description: "Salário Agosto", kind: :credit)
-# Entry.create!(due_date: "05/09/2019", value: 116.00, wallet: nubank, place: prata_fina, description: "Alianças de Namoro", kind: :debit)
+Entry.create!(due_date: "04/09/2019", value: 31.90, wallet: nubank, place: ifood, description: "Pizza", kind: :debit)
+Entry.create!(due_date: "07/09/2019", value: 630.00, wallet: nubank, place: picpay, description: "Fatura Nubank", kind: :credit)
+Entry.create!(due_date: "07/09/2019", value: 9.75, wallet: nubank, place: outros, description: "Cigarro", kind: :debit)
+Entry.create!(due_date: "07/09/2019", value: 36.06, wallet: sodexo, place: mercado, description: "Produto da Lavanderia", kind: :debit)
