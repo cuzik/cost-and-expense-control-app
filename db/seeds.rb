@@ -23,6 +23,7 @@ pixel = Place.create(user: user, name: "Pixel")
 sesc = Place.create(user: user, name: "Sesc")
 netflix = Place.create(user: user, name: "Netflix")
 opa = Place.create(user: user, name: "OPA")
+cacau_show = Place.create(user: user, name: "Cacau Show")
 
 p_nuconta = Place.create(user: user, name: "Carteira NuConta")
 p_bb_debito = Place.create(user: user, name: "Carteira B&B Débito")
@@ -42,8 +43,8 @@ amor = Place.create(user: user, name: "Amor")
 # Cartiras
 nuconta = Wallet.create!(user: user, description: "NuConta", kind: :debit_card, amount: 0.0)
 bb_debito = Wallet.create!(user: user, description: "B&B Débito", kind: :debit_card, amount: 0)
-nubank = Wallet.create!(user: user, description: "NuBank", kind: :credit_card, amount: 0.96)
-bb_credito = Wallet.create!(user: user, description: "B&B Crédito", kind: :credit_card, amount: 1.16)
+nubank = Wallet.create!(user: user, description: "NuBank", kind: :credit_card, amount: -1999.04)
+bb_credito = Wallet.create!(user: user, description: "B&B Crédito", kind: :credit_card, amount: -648.84)
 dinheiro = Wallet.create!(user: user, description: "Dinheiro", kind: :money, amount: 0)
 sodexo = Wallet.create!(user: user, description: "Vale Alimentação", kind: :debit_card, amount: 1.15)
 
@@ -146,3 +147,16 @@ Entry.create!(due_date: "12/09/2019", value: 4.00, wallet: nubank, place: ifood,
 
 Entry.create!(due_date: "13/09/2019", value: 7.10, wallet: nubank, place: p_99_taxi, description: "Indo pra faculdade do mozão", kind: :debit)
 Entry.create!(due_date: "13/09/2019", value: 8.95, wallet: nubank, place: uber, description: "Intado pro trabalho", kind: :debit)
+Entry.create!(due_date: "13/09/2019", value: 9.90, wallet: nubank, place: cacau_show, description: "Bombom pro Mozão", kind: :debit)
+Entry.create!(due_date: "13/09/2019", value: 10.00, wallet: nubank, place: picpay, description: "Recarga de celular", kind: :debit)
+
+Entry.create!(due_date: "14/09/2019", value: 9.75, wallet: nubank, place: outros, description: "Cigarro", kind: :debit)
+Entry.create!(due_date: "14/09/2019", value: 47.90, wallet: nubank, place: uber_eats, description: "Sushi", kind: :debit)
+Entry.create!(due_date: "14/09/2019", value: 30.22, wallet: sodexo, place: mercado, description: "Mantimentos", kind: :debit)
+
+Entry.create!(due_date: "15/09/2019", value: 32.50, wallet: nubank, place: outros, description: "Panificadora Anita", kind: :debit)
+Entry.create!(due_date: "15/09/2019", value: 9.59, wallet: nubank, place: uber, description: "Intado pra casa da Mozão", kind: :debit)
+Entry.create!(due_date: "15/09/2019", value: 9.58, wallet: nubank, place: uber, description: "Voltando da casa da Mozão", kind: :debit)
+Entry.create!(due_date: "15/09/2019", value: 50.00, wallet: dinheiro, place: amor, description: "Mozão pelo find", kind: :credit)
+
+Entry.create!(due_date: "16/09/2019", value: 15.14, wallet: nubank, place: sesc, description: "Almoço", kind: :debit)
