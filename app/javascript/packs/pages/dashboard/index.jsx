@@ -116,7 +116,7 @@ class DashboardIndex extends React.Component {
                 <Grid.Column width={13}>
                   <Grid divided>
                     <Grid.Row>
-                      <Grid.Column width={8}>
+                      <Grid.Column width={9}>
                         <Segment color='black'>
                           <Form size='tiny'>
                             <Form.Group widths='equal' inline>
@@ -147,7 +147,7 @@ class DashboardIndex extends React.Component {
                           </Form>
                         </Segment>
                         </Grid.Column>
-                      <Grid.Column width={8}>
+                      <Grid.Column width={7}>
                         <Segment color='black'>
                           <BalanceResume flow_input={this.state.flow_input} flow_output={this.state.flow_output}/>
                         </Segment>
