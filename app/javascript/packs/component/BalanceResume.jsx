@@ -5,7 +5,7 @@ import { Segment, Grid } from 'semantic-ui-react'
 const ResumeResult = ({ flow_input, flow_output }) => {
   if (flow_input >= flow_output) {
     return (
-      <Segment color='blue'> R$ {(flow_output - flow_input).toFixed(2)} </Segment>
+      <Segment color='blue'> R$ {(flow_input - flow_output).toFixed(2)} </Segment>
     )
   } else {
     return (
