@@ -9,16 +9,9 @@ class EntriesController < ApplicationController
             entries: {
               credit: entries.order(id: :desc).credit,
               debit: entries.order(id: :desc).debit,
-              expected: [],
               flow: {
-                input: entries.where(wallet: current_user.wallets.where(kind: %i[debit_card money])).credit.map {|entry| entry.value }.reduce(0, :+),
+                input: entries.credit.map {|entry| entry.value }.reduce(0, :+),
                 output: entries.debit.map {|entry| entry.value }.reduce(0, :+)
-              },
-              balance_details: {
-                day_by_day: {
-                  credited: entries.credit.select(:due_date, :value).group(:due_date).sum(:value),
-                  debited: entries.debit.select(:due_date, :value).group(:due_date).sum(:value),
-                }
               }
             }
           },
@@ -38,6 +31,7 @@ class EntriesController < ApplicationController
   end
 
   private
+
   def starts_on
     return params[:starts_on] if params[:starts_on].present?
 

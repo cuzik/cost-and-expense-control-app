@@ -25,7 +25,6 @@ class DashboardIndex extends React.Component {
       places: [],
       balanceCredit: props.balanceCredit,
       balanceDebit: props.balanceDebit,
-      balanceExpected: props.balanceExpected,
       flow_input: 0,
       flow_output: 0,
       wallets: [],
@@ -53,7 +52,6 @@ class DashboardIndex extends React.Component {
       this.setState({
         balanceCredit: credit,
         balanceDebit: debit,
-        balanceExpeted: expected,
         flow_input: flow.input,
         flow_output: flow.output
       })
@@ -169,15 +167,11 @@ class DashboardIndex extends React.Component {
                         </Grid.Column>
                       </Grid.Row>
                     </Grid>
-                    <Grid columns={3} divided>
+                    <Grid columns={2} divided>
                       <Grid.Row>
                         <Grid.Column>
                           <Divider horizontal> <Header as='h4'> <Icon name='exchange' /> Recebimentos </Header> </Divider>
                           <BalanceCard listBalance={this.state.balanceCredit} color='positive' />
-                        </Grid.Column>
-                        <Grid.Column>
-                          <Divider horizontal> <Header as='h4'> <Icon name='exchange' /> Pagamentos Previstos </Header> </Divider>
-                          <BalanceCard listBalance={this.state.balanceExpected} color={'warning'} />
                         </Grid.Column>
                         <Grid.Column>
                           <Divider horizontal> <Header as='h4'> <Icon name='exchange' /> Pagamentos Realisados </Header> </Divider>
@@ -199,14 +193,12 @@ class DashboardIndex extends React.Component {
 DashboardIndex.defaultProps = {
   balanceCredit: [],
   balanceDebit: [],
-  balanceExpected: [],
   wallets: []
 }
 
 DashboardIndex.propTypes = {
   balanceCredit: PropTypes.arrayOf(PropTypes.shape()),
   balanceDebit: PropTypes.arrayOf(PropTypes.shape()),
-  balanceExpected: PropTypes.arrayOf(PropTypes.shape()),
   wallets: PropTypes.arrayOf(PropTypes.shape())
 }
 
