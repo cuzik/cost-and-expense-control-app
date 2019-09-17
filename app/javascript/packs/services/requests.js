@@ -29,3 +29,7 @@ export const walletCreate = params => (
 export const placeCreate = params => (
   axios.post('/places', params, getHeader())
 )
+
+export const resumeBalance = params => (
+  axios.get('/charts/resume_balance.json', { params })
+)

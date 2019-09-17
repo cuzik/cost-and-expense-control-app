@@ -160,3 +160,5 @@ Entry.create!(due_date: "15/09/2019", value: 9.58, wallet: nubank, place: uber, 
 Entry.create!(due_date: "15/09/2019", value: 50.00, wallet: dinheiro, place: amor, description: "Mozão pelo find", kind: :credit)
 
 Entry.create!(due_date: "16/09/2019", value: 15.14, wallet: nubank, place: sesc, description: "Almoço", kind: :debit)
+
+Entry.create!(due_date: "17/09/2019", value: 12.60, wallet: nubank, place: sesc, description: "Almoço", kind: :debit)
