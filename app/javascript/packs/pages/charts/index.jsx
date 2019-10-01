@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Navbar from '../../component/Navbar'
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { Grid, Segment, Divider, Header, Icon } from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -31,15 +32,7 @@ class ChartsIndex extends React.Component {
         title: {
           text: 'Trasações'
         }
-      }, {
-        title: {
-          text: 'R$'
-        },
-        opposite: true
       }],
-      legend: {
-        shadow: false
-      },
       tooltip: {
         shared: true
       },
@@ -104,10 +97,42 @@ class ChartsIndex extends React.Component {
 
   render() {
     return(
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={this.configOpitions()}
-      />
+      <Grid celled='internally'>
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <Segment color='black'>
+              <Divider horizontal> <Header as='h3'> <Icon name='chart bar outline' /> Gráficos </Header> </Divider>
+            </Segment>
+
+            <Grid columns={2} divided>
+              <Grid.Row>
+                <Grid.Column width={3}>
+                  <Segment color='black'>
+                    colocarei alguma carlos
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={13}>
+                  <Segment color='black'>
+                    <Grid>
+                      <Grid.Row>
+                        <Grid.Column>
+                          Descrição dessa página
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+                  </Segment>
+                  <Segment color='black'>
+                    <HighchartsReact
+                      highcharts={Highcharts}
+                      options={this.configOpitions()}
+                    />
+                  </Segment>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }
