@@ -1,164 +1,323 @@
-user = User.create!(
+# Create Users
+
+user_01 = User.create!(
   name: "User de Test",
   email: "user@mail.com",
-  cpf: "093.092.619-60",
+  cpf: "111.111.111-11",
   password: "nopasswd"
 )
 
-outros = Place.create(user: user, name: "Outros")
-magrathea = Place.create(user: user, name: "Magrathea Labs")
-mercado = Place.create(user: user, name: "Mercado")
-fliperama = Place.create(user: user, name: "Fliperama")
-celesc = Place.create(user: user, name: "Celesc")
-net = Place.create(user: user, name: "NET")
-aguas_joinville = Place.create(user: user, name: "Águas Joinville")
-ifood = Place.create(user: user, name: "Ifood")
-uber_eats = Place.create(user: user, name: "Uber Eats")
-uber = Place.create(user: user, name: "Uber")
-p_99_taxi = Place.create(user: user, name: "99 taxi")
-picpay = Place.create(user: user, name: "PicPay")
-prata_fina = Place.create(user: user, name: "Prata Fina")
-farmacia = Place.create(user: user, name: "Farmácia")
-pixel = Place.create(user: user, name: "Pixel")
-sesc = Place.create(user: user, name: "Sesc")
-netflix = Place.create(user: user, name: "Netflix")
-opa = Place.create(user: user, name: "OPA")
-cacau_show = Place.create(user: user, name: "Cacau Show")
+user_2 = User.create!(
+  name: "User de Test",
+  email: "user2@mail.com",
+  cpf: "222.222.222-22",
+  password: "nopasswd"
+)
 
-p_nuconta = Place.create(user: user, name: "Carteira NuConta")
-p_bb_debito = Place.create(user: user, name: "Carteira B&B Débito")
-p_nubank = Place.create(user: user, name: "Carteira NuBank")
-p_bb_credito = Place.create(user: user, name: "Carteira B&B Crédito")
-p_dinehiro = Place.create(user: user, name: "Carteira Dinheiro")
-p_vale_ali = Place.create(user: user, name: "Carteira Vale Alimentação")
+# Your Places
 
-# Pessoas
-marcos = Place.create(user: user, name: "Marcos")
-joao = Place.create(user: user, name: "João")
-aloisio = Place.create(user: user, name: "Aloisio")
-julio = Place.create(user: user, name: "Júlio")
-pai = Place.create(user: user, name: "Pai")
-amor = Place.create(user: user, name: "Amor")
+office = Place.create(user: user_01, name: "Office")
+tenant = Place.create(user: user_01, name: "Tenant")
+state = Place.create(user: user_01, name: "State")
+restaurant = Place.create(user: user_01, name: "Restaurant")
 
-# Cartiras
-nuconta = Wallet.create!(user: user, description: "NuConta", kind: :debit_card, amount: 0.0)
-bb_debito = Wallet.create!(user: user, description: "B&B Débito", kind: :debit_card, amount: 0)
-nubank = Wallet.create!(user: user, description: "NuBank", kind: :credit_card, amount: -1999.04)
-bb_credito = Wallet.create!(user: user, description: "B&B Crédito", kind: :credit_card, amount: -648.84)
-dinheiro = Wallet.create!(user: user, description: "Dinheiro", kind: :money, amount: 0)
-sodexo = Wallet.create!(user: user, description: "Vale Alimentação", kind: :debit_card, amount: 1.15)
+# Your Entries
 
-Entry.create!(due_date: "30/08/2019", value: 100.00, wallet: nuconta, place: marcos, description: "Emprestipo", kind: :credit)
-Entry.create!(due_date: "30/08/2019", value: 94.96, wallet: nuconta, place: outros, description: "Gastos do find", kind: :debit)
+debit_card = Wallet.create!(user: user_01, description: "Wallet debit", kind: :debit_card, amount: 20.0)
+credit_card = Wallet.create!(user: user_01, description: "Wallet credit", kind: :credit_card, amount: -200.0)
+money_wallet = Wallet.create!(user: user_01, description: "Money", kind: :money, amount: 50.0)
 
-Entry.create!(due_date: "31/08/2019", value: 80.00, wallet: dinheiro, place: outros, description: "Gás de cozinha", kind: :debit)
-Entry.create!(due_date: "31/08/2019", value: 180.00, wallet: dinheiro, place: aloisio, description: "Dispesas da casa", kind: :credit)
-Entry.create!(due_date: "31/08/2019", value: 20.00, wallet: dinheiro, place: aloisio, description: "Gás de cozinha", kind: :credit)
+moves = {
+  "02/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "03/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "04/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "05/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [
+          { value: 650.00, place: tenant, description: "Beach House Rent" },
+        ],
+      },
+      {
+        wallet: debit_card,
+        debits: [
+          { value: 156.68, place: state, description: "Electrical Light" },
+          { value: 95.90, place: state, description: "Water" },
+        ],
+        credits: [
+          { value: 2000.56, place: office, description: "Salary" },
+        ],
+      },
+    ],
+    transactions: [],
+  },
+  "06/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "09/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "10/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "11/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "12/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "13/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "16/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "17/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "18/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "19/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "20/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "23/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "24/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "25/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "26/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "27/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+  "30/09/2019" => {
+    entries: [
+      {
+        wallet: money_wallet,
+        debits: [
+          { value: 12.50, place: restaurant, description: "Lunch"},
+        ],
+        credits: [],
+      },
+    ],
+    transactions: [],
+  },
+}
 
-Entry.create!(due_date: "01/09/2019", value: 30.00, wallet: dinheiro, place: ifood, description: "Hamburguer", kind: :debit)
+moves.each do |day, entries_groups|
+  entries_groups[:entries].each do |wallet_entries|
+    wallet = wallet_entries[:wallet]
 
-Entry.create!(due_date: "02/09/2019", value: 50.00, wallet: dinheiro, place: julio, description: "Deposito", kind: :debit)
-Entry.create!(due_date: "02/09/2019", value: 21.35, wallet: dinheiro, place: mercado, description: "Comida", kind: :debit)
+    wallet_entries[:debits].each do |entry|
+      Entry.create!(
+        due_date: day,
+        value: entry[:value],
+        wallet: wallet,
+        place: entry[:place],
+        description: entry[:description],
+        kind: :debit
+      )
+    end
 
-Entry.create!(due_date: "03/09/2019", value: 180.77, wallet: nuconta, place: joao, description: "Dispesas da casa", kind: :credit)
-Entry.create!(due_date: "03/09/2019", value: 9.75, wallet: dinheiro, place: outros, description: "Cigarro", kind: :debit)
-Entry.create!(due_date: "03/09/2019", value: 357.00, wallet: sodexo, place: magrathea, description: "Recebimento do vale", kind: :credit)
-Entry.create!(due_date: "03/09/2019", value: 96.33, wallet: sodexo, place: mercado, description: "Compra pra semana", kind: :debit)
-
-Entry.create!(due_date: "04/09/2019", value: 180.00, wallet: nuconta, place: p_nubank, description: "Fatura Nubank", kind: :debit)
-Entry.create!(due_date: "04/09/2019", value: 180.00, wallet: nubank, place: p_nuconta, description: "Fatura Nubank", kind: :credit)
-Entry.create!(due_date: "04/09/2019", value: 47.00, wallet: nubank, place: fliperama, description: "Fliper Mercado", kind: :debit)
-Entry.create!(due_date: "04/09/2019", value: 55.80, wallet: nubank, place: uber_eats, description: "Yakisoba", kind: :debit)
-Entry.create!(due_date: "04/09/2019", value: 31.90, wallet: nubank, place: ifood, description: "Pizza", kind: :debit)
-
-Entry.create!(due_date: "05/09/2019", value: 457.78, wallet: nuconta, place: joao, description: "Aluguél", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 700.00, wallet: nuconta, place: p_nubank, description: "Fatura Nubank", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 700.00, wallet: nubank, place: p_nuconta, description: "Fatura Nubank", kind: :credit)
-Entry.create!(due_date: "05/09/2019", value: 479.13, wallet: nubank, place: picpay, description: "Luz Agosto", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 91.89, wallet: nubank, place: picpay, description: "Água Agosto", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 173.67, wallet: nubank, place: picpay, description: "NET Agosto", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 369.92, wallet: nuconta, place: p_nubank, description: "Fatura Nubank", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 369.92, wallet: nubank, place: p_nuconta, description: "Fatura Nubank", kind: :credit)
-Entry.create!(due_date: "05/09/2019", value: 15.00, wallet: nubank, place: picpay, description: "Recarga do celular", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 648.84, wallet: nuconta, place: p_bb_debito, description: "Transferencia", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 648.84, wallet: bb_debito, place: p_nuconta, description: "Transferencia", kind: :credit)
-Entry.create!(due_date: "05/09/2019", value: 648.84, wallet: bb_debito, place: p_bb_credito, description: "Fatura do Cartão de crédito do Banco do Brasil", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 648.84, wallet: bb_credito, place: p_bb_debito, description: "Fatura do Cartão de crédito do Banco do Brasil", kind: :credit)
-Entry.create!(due_date: "05/09/2019", value: 648.84, wallet: bb_credito, place: picpay, description: "Fatura Nubank", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 105.00, wallet: nuconta, place: marcos, description: "Dispesas da casa", kind: :credit)
-Entry.create!(due_date: "05/09/2019", value: 500.00, wallet: nuconta, place: pai, description: "Não sei", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 8.80, wallet: nubank, place: p_99_taxi, description: "Ida pro Trabalho Mês Passado", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 16.71, wallet: sodexo, place: mercado, description: "Mantimentos", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 9.99, wallet: nubank, place: farmacia, description: "Paracetamol", kind: :debit)
-Entry.create!(due_date: "06/09/2019", value: 3.90, wallet: nubank, place: outros, description: "cache", kind: :debit)
-Entry.create!(due_date: "05/09/2019", value: 2_597.64, wallet: nuconta, place: magrathea, description: "Salário Agosto", kind: :credit)
-
-Entry.create!(due_date: "06/09/2019", value: 59.00, wallet: nubank, place: ifood, description: "Pizza", kind: :debit)
-
-Entry.create!(due_date: "07/09/2019", value: 630.00, wallet: nubank, place: picpay, description: "Fatura Nubank", kind: :credit)
-Entry.create!(due_date: "07/09/2019", value: 9.75, wallet: nubank, place: outros, description: "Cigarro", kind: :debit)
-Entry.create!(due_date: "07/09/2019", value: 36.06, wallet: sodexo, place: mercado, description: "Produto da Lavanderia", kind: :debit)
-Entry.create!(due_date: "07/09/2019", value: 9.64, wallet: nubank, place: uber, description: "Ir pro Kodashi", kind: :debit)
-Entry.create!(due_date: "07/09/2019", value: 80.13, wallet: nubank, place: outros, description: "Kodashi", kind: :debit)
-Entry.create!(due_date: "07/09/2019", value: 5.43, wallet: nubank, place: uber, description: "Voltar do Kodashi", kind: :debit)
-Entry.create!(due_date: "07/09/2019", value: 6.62, wallet: nubank, place: uber, description: "Ir pra pxl", kind: :debit)
-Entry.create!(due_date: "07/09/2019", value: 20.00, wallet: nubank, place: pixel, description: "Pixel", kind: :debit)
-Entry.create!(due_date: "07/09/2019", value: 50.00, wallet: nubank, place: pixel, description: "Pixel", kind: :debit)
-Entry.create!(due_date: "07/09/2019", value: 50.00, wallet: nubank, place: pixel, description: "Pixel", kind: :debit)
-
-Entry.create!(due_date: "08/09/2019", value: 50.00, wallet: nubank, place: pixel, description: "Pixel", kind: :debit)
-Entry.create!(due_date: "08/09/2019", value: 5.48, wallet: nubank, place: uber, description: "volta da pxl", kind: :debit)
-Entry.create!(due_date: "08/09/2019", value: 9.51, wallet: nubank, place: uber, description: "Ir pra casa do mozão", kind: :debit)
-Entry.create!(due_date: "08/09/2019", value: 18.84, wallet: nubank, place: outros, description: "padaria", kind: :debit)
-Entry.create!(due_date: "08/09/2019", value: 9.64, wallet: nubank, place: uber, description: "Ir pro hospital", kind: :debit)
-Entry.create!(due_date: "08/09/2019", value: 9.52, wallet: nubank, place: uber, description: "Voltar pra casa", kind: :debit)
-Entry.create!(due_date: "08/09/2019", value: 65.00, wallet: dinheiro, place: amor, description: "Amor", kind: :credit)
-
-Entry.create!(due_date: "09/09/2019", value: 9.53, wallet: nubank, place: uber, description: "Ir pro trabalho", kind: :debit)
-Entry.create!(due_date: "09/09/2019", value: 14.73, wallet: nubank, place: sesc, description: "Almoço", kind: :debit)
-Entry.create!(due_date: "09/09/2019", value: 14.12, wallet: sodexo, place: mercado, description: "Pão", kind: :debit)
-
-Entry.create!(due_date: "10/09/2019", value: 18.85, wallet: sodexo, place: mercado, description: "Pão e Ração", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 21.90, wallet: nubank, place: netflix, description: "Netflix", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 3.90, wallet: nubank, place: sesc, description: "Sesc", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 3.00, wallet: nubank, place: ifood, description: "Marmita", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 9.75, wallet: nubank, place: outros, description: "Cigarro", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 7.36, wallet: nubank, place: uber, description: "Ir pro OPA", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 35.00, wallet: nubank, place: opa, description: "Batata do OPA", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 10.00, wallet: nubank, place: opa, description: "Recarga do Cartão do OPA", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 11.00, wallet: nubank, place: outros, description: "Cerveja litrão no bar", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 9.75, wallet: dinheiro, place: outros, description: "Cigarro", kind: :debit)
-Entry.create!(due_date: "10/09/2019", value: 4.00, wallet: dinheiro, place: outros, description: "Ficha de Sinuca", kind: :debit)
-
-Entry.create!(due_date: "11/09/2019", value: 5.00, wallet: nubank, place: outros, description: "Shot do Bar", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 5.01, wallet: nubank, place: outros, description: "Shot do Bar", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 5.73, wallet: nubank, place: uber, description: "Voltando pra casa", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 9.22, wallet: nubank, place: uber, description: "Intado pro trabalho", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 6.84, wallet: nubank, place: uber, description: "Intado almoçar com o Mozão", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 23.60, wallet: nubank, place: outros, description: "Panificadora são josé", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 6.53, wallet: nubank, place: uber, description: "Voltando pro trabalho do almoço", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 5.43, wallet: nubank, place: uber, description: "Voltando pra casa da faculdade do Mozão", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 30.00, wallet: nubank, place: ifood, description: "Hamburguer com o Mozão", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 26.71, wallet: sodexo, place: mercado, description: "Mantimentos", kind: :debit)
-Entry.create!(due_date: "11/09/2019", value: 16.02, wallet: sodexo, place: mercado, description: "Mantimentos", kind: :debit)
-
-Entry.create!(due_date: "12/09/2019", value: 3.00, wallet: nubank, place: ifood, description: "Marmita", kind: :debit)
-Entry.create!(due_date: "12/09/2019", value: 4.00, wallet: nubank, place: ifood, description: "Pastel", kind: :debit)
-
-Entry.create!(due_date: "13/09/2019", value: 7.10, wallet: nubank, place: p_99_taxi, description: "Indo pra faculdade do mozão", kind: :debit)
-Entry.create!(due_date: "13/09/2019", value: 8.95, wallet: nubank, place: uber, description: "Intado pro trabalho", kind: :debit)
-Entry.create!(due_date: "13/09/2019", value: 9.90, wallet: nubank, place: cacau_show, description: "Bombom pro Mozão", kind: :debit)
-Entry.create!(due_date: "13/09/2019", value: 10.00, wallet: nubank, place: picpay, description: "Recarga de celular", kind: :debit)
-
-Entry.create!(due_date: "14/09/2019", value: 9.75, wallet: nubank, place: outros, description: "Cigarro", kind: :debit)
-Entry.create!(due_date: "14/09/2019", value: 47.90, wallet: nubank, place: uber_eats, description: "Sushi", kind: :debit)
-Entry.create!(due_date: "14/09/2019", value: 30.22, wallet: sodexo, place: mercado, description: "Mantimentos", kind: :debit)
-
-Entry.create!(due_date: "15/09/2019", value: 32.50, wallet: nubank, place: outros, description: "Panificadora Anita", kind: :debit)
-Entry.create!(due_date: "15/09/2019", value: 9.59, wallet: nubank, place: uber, description: "Intado pra casa da Mozão", kind: :debit)
-Entry.create!(due_date: "15/09/2019", value: 9.58, wallet: nubank, place: uber, description: "Voltando da casa da Mozão", kind: :debit)
-Entry.create!(due_date: "15/09/2019", value: 50.00, wallet: dinheiro, place: amor, description: "Mozão pelo find", kind: :credit)
-
-Entry.create!(due_date: "16/09/2019", value: 15.14, wallet: nubank, place: sesc, description: "Almoço", kind: :debit)
-
-Entry.create!(due_date: "17/09/2019", value: 12.60, wallet: nubank, place: sesc, description: "Almoço", kind: :debit)
+    wallet_entries[:credits].each do |entry|
+      Entry.create!(
+        due_date: day,
+        value: entry[:value],
+        wallet: wallet,
+        place: entry[:place],
+        description: entry[:description],
+        kind: :credit
+      )
+    end
+  end
+end

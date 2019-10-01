@@ -1,24 +1,20 @@
-# README
+# Cost and Expense Control APP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tem que dar uma boa melhorada nesse readme e talz
 
-Things you may want to cover:
 
-* Ruby version
+## Telas que já construi o começo
 
-* System dependencies
+### Home (Dashboard)
 
-* Configuration
+Mostra o balaço e as entradas do ano/mês selecionados
 
-* Database creation
+![Home](docs/home.png)
 
-* Database initialization
+### Gerenciamento dos Lugares e Estabelecimentos
 
-* How to run the test suite
+![Places](docs/places.png)
 
-* Services (job queues, cache servers, search engines, etc.)
+### Gerenciamento dos suas Carteiras
 
-* Deployment instructions
-
-* ...
+![Wallets](docs/wallets.png)
