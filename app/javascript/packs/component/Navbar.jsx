@@ -51,6 +51,10 @@ class Navbar extends React.Component {
               <Icon name='home'/>
               Local
             </Menu.Item>
+            <Menu.Item href='/charts'>
+              <Icon name='chart bar outline'/>
+              Gráficos
+            </Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={this.state.visible}>
