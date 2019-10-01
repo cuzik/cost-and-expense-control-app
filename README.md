@@ -18,3 +18,7 @@ Mostra o balaço e as entradas do ano/mês selecionados
 ### Gerenciamento dos suas Carteiras
 
 ![Wallets](docs/wallets.png)
+
+### Gráficos
+
+![Charts](docs/charts.png)
