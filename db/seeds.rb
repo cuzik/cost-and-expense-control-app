@@ -23,8 +23,8 @@ restaurant = Place.create(user: user_01, name: "Restaurant")
 
 # Your Entries
 
-debit_card = Wallet.create!(user: user_01, description: "Wallet credit", kind: :debit_card, amount: 20.0)
-credit_card = Wallet.create!(user: user_01, description: "Wallet debit", kind: :credit_card, amount: -200.0)
+debit_card = Wallet.create!(user: user_01, description: "Wallet debit", kind: :debit_card, amount: 20.0)
+credit_card = Wallet.create!(user: user_01, description: "Wallet credit", kind: :credit_card, amount: -200.0)
 money_wallet = Wallet.create!(user: user_01, description: "Money", kind: :money, amount: 50.0)
 
 moves = {
